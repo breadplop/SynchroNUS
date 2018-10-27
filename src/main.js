@@ -38,5 +38,20 @@ new Vue({
   el: '#app',
   router,
   components: { App },
+  data: () => ({
+    module_subclass: [
+      ['Module Review', 'school'],
+      ['Teaching Review', 'teacher']
+    ],
+    career_subclass: [
+      ['Career 1', 'school'],
+      ['Career 2', 'teacher']
+    ],
+    sep_subclass: [
+      ['SEP subclass 1', 'school'],
+      ['SEP subclass 2', 'teacher']
+    ]
+
+  }),
   template: '<App/>'
 })
