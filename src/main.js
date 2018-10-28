@@ -3,6 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+
+window.$ = require('jquery')
+window.JQuery = require('jquery')
+
 import {
   Vuetify,
   VApp,
@@ -13,6 +17,9 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VOverflowBtn,
+  VCard,
+  VImg,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -27,10 +34,17 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VOverflowBtn,
+    VCard,
+    VImg,
     transitions
   }
 })
 
+import VueChartkick from 'vue-chartkick'
+
+Vue.use(VueChartkick)
+Vue.use(router)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -55,3 +69,6 @@ new Vue({
   }),
   template: '<App/>'
 })
+
+
+

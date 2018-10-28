@@ -9,8 +9,9 @@ import ModulePlanningOne from '@/components/pages/1-ModulePlanning'
 import TeachingReviewTwo from '@/components/pages/2-TeachingReview'
 import CareerProspectsThree from '@/components/pages/3-CareerProspects'
 import JobSearchFour from '@/components/pages/4-JobSearch'
-import ExchangeUniversitiesFive from '@/components/pages/5-ExchangeUniversities'
-import ExchangeModulesSix from '@/components/pages/6-ExchangeModules'
+import ExchangePageFive from '@/components/pages/5-ExchangePage'
+import ExchangeUniversitiesSix from '@/components/pages/6-ExchangeUniversities'
+import ExchangeModulesSeven from '@/components/pages/7-ExchangeModules'
 
 
 Vue.use(Router)
@@ -63,14 +64,22 @@ export default new Router({
       component: JobSearchFour
     },
     {
+      path: '/exchange-page',
+      name: 'Exchange',
+      component: ExchangePageFive,
+      props: true
+    },
+    {
       path: '/exchange-universities',
       name: 'Exchange Universities',
-      component: ExchangeUniversitiesFive
+      component: ExchangeUniversitiesSix,
+      props: true
     },
     {
       path: '/exchange-modules',
       name: 'Exchange Modules',
-      component: ExchangeModulesSix
+      component: ExchangeModulesSeven,
+      props: true
     }                                  
   ]
 })

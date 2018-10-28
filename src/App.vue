@@ -1,6 +1,6 @@
 <template>
-  <v-app dark>
-    <v-toolbar class='light-blue'>
+  <v-app>
+    <v-toolbar color="indigo darken-3" dark>
       <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
       <v-toolbar-title>{{currentRoute}}</v-toolbar-title>
       <v-spacer></v-spacer>
@@ -18,9 +18,9 @@
         absolute
     >
       <!--toolbar for name-->
-      <v-toolbar flat class="transparent"> 
+      <v-toolbar>
         <v-list class="pa-0">
-          <v-list-tile avatar>
+          <v-list-tile>
             <v-list-tile-avatar>
               <img src="https://randomuser.me/api/portraits/men/85.jpg" />
             </v-list-tile-avatar>
@@ -83,7 +83,7 @@
             sub-group
             value="true"
           >
-            <v-list-tile slot="activator">
+            <v-list-tile slot="activator" :key="'Exchange Page'" :to="'/exchange-page'">
               <v-list-tile-title>Exchange</v-list-tile-title>
             </v-list-tile>
   
@@ -134,6 +134,9 @@
 </template>
 
 <script>
+// import JQuery from 'jquery'
+// let $ = JQuery
+
 export default {
   name: "App",
   data() {

@@ -12,11 +12,11 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Industry</h3>
-                <hbar-chart :hbar-data="industry_job_channels" :options="options" :width="100" :height="50"></hbar-chart>
+                <!--<hbar-chart :hbar-data="industry_job_channels" :options="options" :width="100" :height="50"></hbar-chart>-->
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Job Title</h3>
-                <hbar-chart :hbar-data="occupation_job_channels" :width="100" :height="50"></hbar-chart>
+                <!--<hbar-chart :hbar-data="occupation_job_channels" :width="100" :height="50"></hbar-chart>-->
             </v-flex>
         </v-layout>
         <br>
@@ -27,14 +27,17 @@
             <v-flex xs15 sm12>
                 <h3>Amount of time to get a job offer</h3>
                 <v-subheader>What is the average time to get a job offer by job search channel?</v-subheader>
-                <line-chart :chart-data="time_job_channels" :options="lineOptions" :width="70" :height="30"></line-chart>
+                <!--<line-chart :chart-data="time_job_channels" :options="lineOptions" :width="70" :height="30"></line-chart>-->
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm12>
                 <h3>Month of start of job search</h3>
                 <v-subheader>When is the best time to start looking for jobs?</v-subheader>
-                <line-chart :chart-data="month_job_channels" :options="lineOptions" :width="70" :height="30"></line-chart>
+                <!--<line-chart :chart-data="month_job_channels" :options="lineOptions" :width="70" :height="30"></line-chart>-->
+              <line-chart :data="{'2017-01-01': 11, '2017-01-02': 6}"></line-chart>
+              <geo-chart :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"></geo-chart>
+
             </v-flex>
         </v-layout>
     </v-container>
@@ -43,20 +46,7 @@
 </template>
 
 <script>
-  import LineChart from '../charts/LineChart.js'
-  import BarChart from '../charts/BarChart.js'
-  import HbarChart from '../charts/HorizontalBar.js'
-  import RadarChart from '../charts/RadarChart.js'
-  import Filters from '../filters/Filters'
-
   export default {
-    components: {
-      LineChart,
-      BarChart,
-      HbarChart,
-      RadarChart,
-      Filters
-    },
     data () {
       return {
         datacollection: null,
