@@ -13,10 +13,12 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VAutocomplete,
+  VRadioGroup,
+  VSwitch,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
-
 Vue.use(Vuetify, {
   components: {
     VApp,
@@ -27,6 +29,9 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VAutocomplete,
+    VRadioGroup,
+    VSwitch,
     transitions
   }
 })

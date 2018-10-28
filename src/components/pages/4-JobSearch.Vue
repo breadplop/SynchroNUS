@@ -12,11 +12,11 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Industry</h3>
-                <hbar-chart :hbar-data="industry_job_channels" :options="options" :width="100" :height="50"></hbar-chart>
+                <hbar-chart :chart-data="industry_job_channels" :options="options" :width="100" :height="50"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Job Title</h3>
-                <hbar-chart :hbar-data="occupation_job_channels" :width="100" :height="50"></hbar-chart>
+                <hbar-chart :chart-data="occupation_job_channels" :width="100" :height="50"></hbar-chart>
             </v-flex>
         </v-layout>
         <br>

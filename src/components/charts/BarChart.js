@@ -4,7 +4,7 @@ const { reactiveProp } = mixins
 export default {
   extends: Bar,
   mixins: [reactiveProp],
-  props: ['barData', 'options'],
+  props: ['chartData', 'options'],
   data () {
     return {
       datacollection: {
@@ -20,6 +20,6 @@ export default {
     }
   },
   mounted () {
-    this.renderChart(this.barData, {responsive: true, maintainAspectRatio: true})
+    this.renderChart(this.chartData, {responsive: true, maintainAspectRatio: true})
   }
 }
