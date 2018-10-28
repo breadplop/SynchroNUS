@@ -17,6 +17,9 @@ import {
   VIcon,
   VGrid,
   VToolbar,
+  VAutocomplete,
+  VRadioGroup,
+  VSwitch,
   VOverflowBtn,
   VCard,
   VImg,
@@ -34,6 +37,9 @@ Vue.use(Vuetify, {
     VIcon,
     VGrid,
     VToolbar,
+    VAutocomplete,
+    VRadioGroup,
+    VSwitch,
     VOverflowBtn,
     VCard,
     VImg,
@@ -69,6 +75,3 @@ new Vue({
   }),
   template: '<App/>'
 })
-
-
-

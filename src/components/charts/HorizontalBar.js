@@ -4,7 +4,7 @@ const { reactiveProp } = mixins
 export default {
   extends: HorizontalBar,
   mixins: [reactiveProp],
-  props: ['HbarData', 'options'],
+  props: ['chartData', 'options'],
   data () {
     return {
       datacollection: {
@@ -20,6 +20,6 @@ export default {
     }
   },
   mounted () {
-    this.renderChart(this.HbarData, this.options,{responsive: true, maintainAspectRatio: false})
+    this.renderChart(this.chartData, this.options,{responsive: true, maintainAspectRatio: false})
   }
 }

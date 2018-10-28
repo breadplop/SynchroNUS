@@ -13,15 +13,15 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: What is your overall opinion of the module?</h3>
-                <hbar-chart :hbar-data="m1_data"></hbar-chart>
+                <hbar-chart :chart-data="m1_data"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The grade that I am most likely to get in the module is</h3>
-                <bar-chart :bar-data="m2_data"></bar-chart>
+                <bar-chart :chart-data="m2_data"></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: I rate this module as</h3>
-                <hbar-chart :hbar-data="m3_data"></hbar-chart>
+                <hbar-chart :chart-data="m3_data"></hbar-chart>
             </v-flex>
         </v-layout>
 
@@ -32,12 +32,12 @@
             <v-flex xs15 sm6>
                 <h3>Qn: What I liked about the module:</h3>
                 <i>what shld i put here? word cloud?</i>
-                <radar-chart :radar-data="radar_data_plus"></radar-chart>
+                <radar-chart :chart-data="radar_data_plus"></radar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Qn: What I did not like about the module:</h3>
                 <i>what shld i put here? word cloud?</i>
-                <radar-chart :radar-data="radar_data_minus"></radar-chart>
+                <radar-chart :chart-data="radar_data_minus"></radar-chart>
             </v-flex>
         </v-layout>
     </v-container>

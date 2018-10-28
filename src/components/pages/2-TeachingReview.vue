@@ -12,21 +12,21 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has enhanced my thinking ability.</h3>
-                <hbar-chart :hbar-data="t1_data"></hbar-chart>
+                <hbar-chart :chart-data="t1_data"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher provided timely and useful feedback.</h3>
-                <hbar-chart :hbar-data="t2_data"></hbar-chart>
+                <hbar-chart :chart-data="t2_data"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has increased my interest in the subject.</h3>
-                <hbar-chart :hbar-data="t3_data"></hbar-chart>
+                <hbar-chart :chart-data="t3_data"></hbar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>What are the instructor's strengths?</h3>
-                <radar-chart :radar-data="radar_data_plus"></radar-chart>
+                <radar-chart :chart-data="radar_data_plus"></radar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Nominated for teaching awards</h3>
