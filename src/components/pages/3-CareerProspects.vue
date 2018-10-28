@@ -13,11 +13,11 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Count by Industry</h3>
-                <pie-chart :pie-data="count_industry" :width="100" :height="50"></pie-chart>
+                <pie-chart :chart-data="count_industry" :width="100" :height="50"></pie-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Count by Job Title</h3>
-                <pie-chart :pie-data="count_job_title" :width="100" :height="50"></pie-chart>
+                <pie-chart :chart-data="count_job_title" :width="100" :height="50"></pie-chart>
             </v-flex>
         </v-layout>
         <br>
@@ -28,27 +28,27 @@
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Relevance by Industry</h3>
-                <hbar-chart :hbar-data="relevance_industry" :options='options' :width="70" :height="30"></hbar-chart>
+                <hbar-chart :chart-data="relevance_industry" :options='options' :width="70" :height="30"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Relevance by Job Title</h3>
-                <hbar-chart :hbar-data="relevance_job_title" :options='options' :width="70" :height="30"></hbar-chart>
+                <hbar-chart :chart-data="relevance_job_title" :options='options' :width="70" :height="30"></hbar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Industry</h3>
-                <hbar-chart :hbar-data="preparedness_industry" :options='options' :width="70" :height="30"></hbar-chart>
+                <hbar-chart :chart-data="preparedness_industry" :options='options' :width="70" :height="30"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Job Title</h3>
-                <hbar-chart :hbar-data="preparedness_job_title" :options='options' :width="70" :height="30"></hbar-chart>
+                <hbar-chart :chart-data="preparedness_job_title" :options='options' :width="70" :height="30"></hbar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm10>
                 <h3>Income Level by Job Title</h3>
-                <hbar-chart :hbar-data="income_by_job_title" :options='options' :width="100" :height="40"></hbar-chart>
+                <hbar-chart :chart-data="income_by_job_title" :options='options' :width="100" :height="40"></hbar-chart>
             </v-flex>
         </v-layout>
     </v-container>
