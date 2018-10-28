@@ -67,6 +67,7 @@
       HbarChart,
       Filters
     },
+    list: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],
     data () {
       return {
         datacollection: null,
@@ -76,8 +77,13 @@
                 yAxes: [{ stacked: true}]
             }
         },
+        methods: {
+            getList() {
+                return ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist']
+            }
+        },
         count_job_title: {
-            labels: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],
+            labels: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],//this.getList(),
             datasets: [
                 {
                 label: 'Job Title',

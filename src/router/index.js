@@ -11,6 +11,7 @@ import CareerProspectsThree from '@/components/pages/3-CareerProspects'
 import JobSearchFour from '@/components/pages/4-JobSearch'
 import ExchangeUniversitiesFive from '@/components/pages/5-ExchangeUniversities'
 import ExchangeModulesSix from '@/components/pages/6-ExchangeModules'
+import RandomChart from '@/components/pages/7-RandomChart'
 
 
 Vue.use(Router)
@@ -71,6 +72,11 @@ export default new Router({
       path: '/exchange-modules',
       name: 'Exchange Modules',
       component: ExchangeModulesSix
+    },
+    {
+      path: '/random-chart',
+      name: 'Random Chart',
+      component: RandomChart
     }                                  
   ]
 })

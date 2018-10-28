@@ -19,6 +19,9 @@ import {
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
+import VueChartkick from 'vue-chartkick'
+ 
+Vue.use(VueChartkick)
 Vue.use(Vuetify, {
   components: {
     VApp,
