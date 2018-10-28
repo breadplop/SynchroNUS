@@ -13,10 +13,7 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: What is your overall opinion of the module?</h3>
-                <bar-chart :data="'m1_data_ck'"></bar-chart>
-                <bar-chart :data='test1'></bar-chart>
-                {{test1}}
-                <bar-chart :data="[['Work', 32], ['Play', 1492]]"></bar-chart>
+                <hbar-chart :chart-data="m1_data"></hbar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The grade that I am most likely to get in the module is</h3>
@@ -49,17 +46,23 @@
 </template>
 
 <script>
+  import LineChart from '../charts/LineChart.js'
+  import BarChart from '../charts/BarChart.js'
+  import HbarChart from '../charts/HorizontalBar.js'
+  import RadarChart from '../charts/RadarChart.js'
   import Filters from '../filters/Filters'
 
   export default {
     components: {
+      LineChart,
+      BarChart,
+      HbarChart,
+      RadarChart,
       Filters
     },
     data () {
       return {
         datacollection: null,
-        m1_data_ck: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]],
-        test1: "[['Work', 32], ['Play', 1492]]",
         m1_data: {
             labels: ['1', '2', '3', '4', '5'],
             datasets: [
