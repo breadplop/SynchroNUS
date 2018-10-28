@@ -1,11 +1,41 @@
 <template>
 <v-app light>
 <v-content>
-    <v-container>
-        <h1>add filters</h1>
-        <filters></filters>
+    <v-container id='1' grid-list-xl>
+        <!--<filters></filters>-->
     </v-container>
     <v-container id='1' grid-list-xl>
+        <v-layout row wrap mb-5>
+          <v-flex xs12 sm5>
+            <v-overflow-btn
+              :items="semesters_filter"
+              label="Choose Semester"
+              target="#dropdown-example"
+              v-model="filtered.semesters_filter"
+              @change="navigateTo(filtered)"
+              solo
+            ></v-overflow-btn>
+            <v-overflow-btn
+              :items="faculty_filter"
+              label="Choose Faculty"
+              target="#dropdown-example"
+              v-model="filtered.faculty_filter"
+              @change="fetchUrl(filtered)"
+              solo
+            ></v-overflow-btn>
+          </v-flex>
+          <v-flex xs12 sm5>
+              <v-overflow-btn
+              :items="cap_filter"
+              label="CAP between.."
+              target="#dropdown-example"
+              v-model="filtered.cap_filter"
+              @change="fetchUrl(filtered)"
+              solo
+            ></v-overflow-btn>
+          </v-flex>
+
+        </v-layout>
 <!--first row-->        
         <!--MCQ questions -->
         <v-header><h2>Opinions of Module</h2></v-header>
@@ -13,15 +43,15 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: What is your overall opinion of the module?</h3>
-                <hbar-chart :chart-data="m1_data"></hbar-chart>
+                <bar-chart :data='this.info'></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The grade that I am most likely to get in the module is</h3>
-                <bar-chart :chart-data="m2_data"></bar-chart>
+                <bar-chart :data='data.m2_data_ck.data'></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: I rate this module as</h3>
-                <hbar-chart :chart-data="m3_data"></hbar-chart>
+                <bar-chart :data='data.m3_data_ck.data'></bar-chart>
             </v-flex>
         </v-layout>
 
@@ -31,12 +61,10 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Qn: What I liked about the module:</h3>
-                <i>what shld i put here? word cloud?</i>
                 <radar-chart :chart-data="radar_data_plus"></radar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Qn: What I did not like about the module:</h3>
-                <i>what shld i put here? word cloud?</i>
                 <radar-chart :chart-data="radar_data_minus"></radar-chart>
             </v-flex>
         </v-layout>
@@ -46,52 +74,39 @@
 </template>
 
 <script>
-  import LineChart from '../charts/LineChart.js'
-  import BarChart from '../charts/BarChart.js'
-  import HbarChart from '../charts/HorizontalBar.js'
-  import RadarChart from '../charts/RadarChart.js'
   import Filters from '../filters/Filters'
+  import RadarChart from '../charts/RadarChart.js'
+  import router from '../../router'
+  import axios from 'axios'
+
 
   export default {
     components: {
-      LineChart,
-      BarChart,
-      HbarChart,
+      Filters,
       RadarChart,
-      Filters
+      router,
+      axios
     },
     data () {
       return {
         datacollection: null,
-        m1_data: {
-            labels: ['1', '2', '3', '4', '5'],
-            datasets: [
-                {
-                label: 'Scale of 1-5, with 1 as the lowest',
-                backgroundColor: 'orange',
-                data: [10, 12, 78, 102, 5]
-                }
-            ]
-        },
-        m2_data: {
-            labels: ['F', 'D', 'C', 'B', 'A'],
-            datasets: [
-                {
-                label: 'Grade',
-                backgroundColor: '#f47889',
-                data: [10, 30, 78, 102, 50]
-                }
-            ]
-        },
-        m3_data: {
-            labels: ['1', '2', '3', '4', '5'],
-            datasets: [
-                {
-                label: 'Scale of 1-5, with 1 as the lowest',
-                backgroundColor: 'silver',
-                data: [10, 12, 78, 102, 5]
-                }
-            ]
+        filtered: {semester_filter: 'null', faculty_filter: 'null', cap_filter: 'null'},
+        info: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]],
+        errored: false,
+        loading: true,
+        data: {
+            m1_data_ck: {
+                name: 'm1_data', 
+                data: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]]
+            },
+            m2_data_ck: {
+                name: 'm2_data',
+                data: [['A', 50], ['B', 102], ['C', 78], ['D', 30], ['E', 10]]
+            },
+            m3_data_ck: {
+                name: 'm3_data', 
+                data: [[1, 12], [2, 13], [3, 72], [4, 132], [5,10]]
+            }
         },
         radar_data_plus: {
             labels: ['Useful', 'Moderate', 'Prof', 'Interesting', 'Fun'],
@@ -112,33 +127,30 @@
                 data: [23, 32, 54, 10, 10]
                 }
             ]
-        }
+        },
+        semesters_filter: ['All', 'Last 3 years','2016_Sem1', '2016_Sem2', '2017_Sem1', '2017_Sem2'],
+        faculty_filter: ['All', 'SOC', 'FASS', 'SDE', 'BIZ', 'Science'],
+        cap_filter: ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5']
       }
     },
     mounted () {
-      this.fillData()
-    },
+        },
     methods: {
-      fillData () {
-        this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt()],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: 'green',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }, {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }
-          ]
+        fetchUrl: async function(filter_params) {
+            let sem_param = filter_params.semesters_filter
+            let cap_param = filter_params.cap_filter
+            let faculty_param = filter_params.faculty_param
+            let queryParam = '?semester=' + sem_param + '&cap=' + cap_param + '&faculty=' + faculty_param
+            let res = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus' + queryParam)
+            let theJson = await res.json()
+            this.info = theJson
+            console.log(queryParam)
+            console.log('json')
+            console.log(theJson)
+            router.push(this.$route.path + '?semester='+filter_params.semesters_filter + '&cap=' + filter_params.cap_filter + '&faculty=' + filter_params.faculty_filter)
         }
-      },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-      }
     }
+
   }
 </script>
 

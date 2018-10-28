@@ -1,9 +1,7 @@
 <template>
 <v-app light>
 <v-content>
-    <v-container>
-        <filters></filters>
-    </v-container>
+    <filters></filters>
     <v-container id='1' grid-list-xl>
 <!--first row-->        
         <!--MCQ questions -->
@@ -12,15 +10,15 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has enhanced my thinking ability.</h3>
-                <hbar-chart :chart-data="t1_data"></hbar-chart>
+                <bar-chart :data="data.t1_data_ck.data"></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher provided timely and useful feedback.</h3>
-                <hbar-chart :chart-data="t2_data"></hbar-chart>
+                <bar-chart :data="data.t2_data_ck.data"></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has increased my interest in the subject.</h3>
-                <hbar-chart :chart-data="t3_data"></hbar-chart>
+                <bar-chart :data="data.t3_data_ck.data"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
@@ -30,7 +28,7 @@
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Nominated for teaching awards</h3>
-                <line-chart :chart-data="t7c_data"></line-chart>
+                <line-chart :data="data.t7c_data_ck.data"></line-chart>
             </v-flex>
         </v-layout>
     </v-container>
@@ -39,23 +37,35 @@
 </template>
 
 <script>
-  import LineChart from '../charts/LineChart.js'
-  import BarChart from '../charts/BarChart.js'
-  import HbarChart from '../charts/HorizontalBar.js'
   import RadarChart from '../charts/RadarChart.js'
   import Filters from '../filters/Filters'
 
   export default {
     components: {
-      LineChart,
-      BarChart,
-      HbarChart,
       RadarChart,
       Filters
     },
     data () {
       return {
         datacollection: null,
+        data: {
+            t1_data_ck: {
+                name: 't1_data', 
+                data: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]]
+            },
+            t2_data_ck: {
+                name: 't2_data',
+                data: [[1, 10], [2, 30], [3, 38], [4, 23], [5,10]]
+            },
+            t3_data_ck: {
+                name: 't3_data', 
+                data: [[1, 12], [2, 13], [3, 72], [4, 132], [5,10]]
+            },
+            t7c_data_ck: {
+                name: 't7c_data',
+                data: [['2010', 0], ['2011', 0], ['2012', 0], ['2013', 1], ['2014', 2], ['2015', 0], ['2016', 0]]
+            }
+        },
         t1_data: {
             labels: ['1', '2', '3', '4', '5'],
             datasets: [
@@ -130,7 +140,11 @@
       },
       getRandomInt () {
         return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-      }
+      },
+      fetchUrl () {
+        router.push(this.$route.path + '?semester='+filter_params.semesters_filter + '&cap=' + filter_params.cap_filter + '&faculty=' + filter_params.faculty_filter)
+        return 
+      } 
     }
   }
 </script>

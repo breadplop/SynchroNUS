@@ -5,6 +5,13 @@
         <filters></filters>
     </v-container>
     <v-container id='1' grid-list-xl>
+<!--zero row -->
+        <h2>How does CAP affect Income</h2>
+        <v-layout row wrap>
+            <v-flex xs12 sm12>
+            <scatter-chart title="Avg Income Level VS CAP" xtitle="CAP" ytitle='Avg Income Level' :data="[[4.13, 5000],[4.5, 4200],[4.5, 4200],[4.0, 4200],[4.65, 5200],[3.8, 4000],[3.65, 3800],[3.3, 3500],[4.24, 5100]]"></scatter-chart>
+            </v-flex>
+        </v-layout>
 <!--first row-->        
         <!--Breakdown of Employment by Industry and Occupation -->
         <v-header><h2>Breakdown of Employment by Industry and Occupation</h2></v-header>
@@ -13,11 +20,12 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Count by Industry</h3>
-                <pie-chart :chart-data="count_industry" :width="100" :height="50"></pie-chart>
+                <pie-chart :data="data.count_job_title_ck.data"></pie-chart>
+                
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Count by Job Title</h3>
-                <pie-chart :chart-data="count_job_title" :width="100" :height="50"></pie-chart>
+                <pie-chart :data="data.count_industry_ck.data"></pie-chart>
             </v-flex>
         </v-layout>
         <br>
@@ -28,27 +36,27 @@
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Relevance by Industry</h3>
-                <hbar-chart :chart-data="relevance_industry" :options='options' :width="70" :height="30"></hbar-chart>
+                <bar-chart title="Relevance by Industry" xtitle="Relevance Score" :min="0" :max="5" :data="data.relevance_industry_ck.data"></bar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Relevance by Job Title</h3>
-                <hbar-chart :chart-data="relevance_job_title" :options='options' :width="70" :height="30"></hbar-chart>
+                <bar-chart title="Relevance by Job Title" xtitle="Relevance Score" :min="0" :max="5" :data="data.relevance_job_title_ck.data"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Industry</h3>
-                <hbar-chart :chart-data="preparedness_industry" :options='options' :width="70" :height="30"></hbar-chart>
+                <bar-chart title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_industry_ck.data"></bar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Job Title</h3>
-                <hbar-chart :chart-data="preparedness_job_title" :options='options' :width="70" :height="30"></hbar-chart>
+                <bar-chart title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_job_title_ck.data"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm10>
                 <h3>Income Level by Job Title</h3>
-                <hbar-chart :chart-data="income_by_job_title" :options='options' :width="100" :height="40"></hbar-chart>
+                <bar-chart title="Income Level by Job Title" :stacked="true" :data=data.income_by_job_title_ck.data></bar-chart>
             </v-flex>
         </v-layout>
     </v-container>
@@ -57,14 +65,10 @@
 </template>
 
 <script>
-  import HbarChart from '../charts/HorizontalBar.js'
-  import PieChart from '../charts/PieChart.js'
   import Filters from '../filters/Filters'
 
   export default {
     components: {
-      PieChart,
-      HbarChart,
       Filters
     },
     data () {
@@ -76,87 +80,46 @@
                 yAxes: [{ stacked: true}]
             }
         },
-        count_job_title: {
-            labels: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],
-            datasets: [
-                {
-                label: 'Job Title',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple'],
-                data: [50,48,40,60,42]
-                }
-            ]
-        },
-        count_industry: {
-            labels: ['Finance', 'Real Estate', 'Healthcare', 'Manufacturing', 'Telecommunications', 'F&B'],
-            datasets: [
-                {
-                label: 'Industry Name',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple', 'pink'],
-                data: [66, 34, 30, 25, 28, 23]
-                }
-            ]
-        },
-        relevance_industry: {
-            labels: ['Finance', 'Real Estate', 'Healthcare', 'Manufacturing', 'Telecommunications', 'F&B'],
-            datasets: [
-                {
-                label: 'Average Relevance Score',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple', 'pink'],
-                data: [4.5, 3.4, 4.0, 3.0, 4.2, 3.3]
-                }
-            ]
-        },
-        relevance_job_title: {
-            labels: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],
-            datasets: [
-                {
-                label: 'Average Relevance Score',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple'],
-                data: [4.5, 3.4, 4.0, 3.0, 4.2]
-                }
-            ]
-        },
-        preparedness_industry: {
-            labels: ['Finance', 'Real Estate', 'Healthcare', 'Manufacturing', 'Telecommunications', 'F&B'],
-            datasets: [
-                {
-                label: 'Average Relevance Score',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple', 'yellow'],
-                data: [4.2, 3.3, 3.8, 3.2, 4.0, 3.5]
-                }
-            ]
-        },
-        preparedness_job_title: {
-            labels: ['Consultant', 'Financial Analyst', 'Risk Analyst', 'Data Analyst', 'Data Scientist'],
-            datasets: [
-                {
-                label: 'Average Relevance Score',
-                backgroundColor: ['blue', 'green', 'orange', 'red', 'purple'],
-                data: [4.5, 3.4, 4.0, 3.0, 4.2]
-                }
-            ]
-        },
-        income_by_job_title: {
-            labels: ['<3.5K', '3.5K to 4.0K', '4.0K to 4.5K', '4.5K to 5.0K', '5.5K>'],
-            datasets: [
-                {
-                label: 'Data Analyst',
-                backgroundColor: 'orange',
-                data: [30, 55, 28, 24, 0]
-                },
-                {
-                label: 'Data Analyst',
-                backgroundColor: 'purple',
-                data: [35, 63, 43, 32, 20]
-                },
-                {
-                label: 'Data Engineer',
-                backgroundColor: 'green',
-                data: [20, 23, 40, 30, 18]
-                }
-            ]
+        data: {
+            count_job_title_ck: {
+                name: 'Count Job Title',
+                data: [['Consultant', 50], ['Financial Analyst', 48], ['Risk Analyst', 40], ['Data Analyst', 60], ['Data Scientist', 42]]
+            },
+            count_industry_ck: {
+                name: 'Count Industry',
+                data: [['Finance', 66], ['Real Estate', 34], ['Healthcare', 30], ['Manufacturing', 25], ['Telecommunications', 28], ['F&B', 23]]
+            },
+            relevance_industry_ck: {
+                name: 'Relevance of Industry',
+                data: [['Finance', 4.4], ['Real Estate', 3.6], ['Healthcare', 3.6], ['Manufacturing', 3.3], ['Telecommunications', 3.3], ['F&B', 3.1]]
+            },
+            relevance_job_title_ck: {
+                name: 'Relevance of Job Title',
+                data: [['Consultant', 4.2],['Data Analyst', 4.6], ['Data Scientist', 3.1], ['Risk Analyst', 4.1], ['Financial Analyst', 4.1]]
+            },
+            preparedness_industry_ck: {
+                name: 'Preparedness Score by Industry',
+                data: [['Finance', 4.0], ['Real Estate', 3.3], ['Healthcare', 3.6], ['Manufacturing', 3.5], ['Telecommunications', 3.3], ['F&B', 3.1]]
+            },
+            preparedness_job_title_ck: {
+                name: 'Preparedness Scoress by Job Title ',
+                data: [['Consultant', 3.4],['Data Analyst', 4.6], ['Data Scientist', 3.1], ['Risk Analyst', 4.1], ['Financial Analyst', 4.0]]
+            },
+            income_by_job_title_ck: {
+                name: '',
+                data: [
+                    {
+                        name: "Data Analyst", 
+                        data: [["<3K",32],["3.5K to 4K",46],["4K to 4.5K",28],["4.5K to 5K",21]]},
+                    {
+                        name: "Data Scientist", 
+                        data: [["<3K",25],["4K to 4.5K",41],["4.5K to 5K",21],["5K to 5.5K",17]]},
+                    {
+                        name: "Data Engineer", 
+                        data: [["<3K",4],["3.5K to 4K",6],["4K to 4.5K",8],["4.5K to 5K",4]]
+                    }],
+            }
         }
-       
       }
     }
   }
