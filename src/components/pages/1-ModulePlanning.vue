@@ -13,18 +13,15 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: What is your overall opinion of the module?</h3>
-                <bar-chart :data="'m1_data_ck'"></bar-chart>
-                <bar-chart :data='test1'></bar-chart>
-                {{test1}}
-                <bar-chart :data="[['Work', 32], ['Play', 1492]]"></bar-chart>
+                <bar-chart :data='data.m1_data_ck.data'></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The grade that I am most likely to get in the module is</h3>
-                <bar-chart :chart-data="m2_data"></bar-chart>
+                <bar-chart :data='data.m2_data_ck.data'></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: I rate this module as</h3>
-                <hbar-chart :chart-data="m3_data"></hbar-chart>
+                <bar-chart :data='data.m3_data_ck.data'></bar-chart>
             </v-flex>
         </v-layout>
 
@@ -50,16 +47,31 @@
 
 <script>
   import Filters from '../filters/Filters'
+  import RadarChart from '../charts/RadarChart.js'
 
   export default {
     components: {
-      Filters
+      Filters,
+      RadarChart
     },
     data () {
       return {
         datacollection: null,
-        m1_data_ck: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]],
-        test1: "[['Work', 32], ['Play', 1492]]",
+        data: {
+            m1_data_ck: {
+                name: 'm1_data', 
+                data: [[1, 10], [2, 12], [3, 78], [4, 102], [5,5]]
+            },
+            m2_data_ck: {
+                name: 'm2_data',
+                data: [['A', 50], ['B', 102], ['C', 78], ['D', 30], ['E', 10]]
+            },
+            m3_data_ck: {
+                name: 'm3_data', 
+                data: [[1, 12], [2, 13], [3, 72], [4, 132], [5,10]]
+            }
+        },
+        exchange_modules: [{name: "Pass", data: [["{{mod1}} | {{mappedTo1}}",32],["1",46],["2",28],["3",21],["4",20],["5",13],["6",27]]}, {name: "Fail", data: [["{{mod1}} | {{mappedTo1}}",2],["1",4],["2",2],["3",1],["4",2],["5",3],["6",0]]}],
         m1_data: {
             labels: ['1', '2', '3', '4', '5'],
             datasets: [
