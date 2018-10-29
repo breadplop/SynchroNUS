@@ -28,7 +28,13 @@
             @change="fetchUrl(filtered)"
             solo
         ></v-overflow-btn>
+        <v-switch
+            :key="similarStudentsFlag"
+            :label="'Students Similar to Me: ' + similarStudentsFlag"
+            v-model='similarStudentsFlag'
+        ></v-switch>
         </v-flex>
+        
     </v-layout>
 </v-container>
 </template>
@@ -42,7 +48,8 @@ export default {
             filtered: {semester_filter: null, faculty_filter: null, cap_filter: null},
             semesters_filter: ['All', 'Last 3 years','2016_Sem1', '2016_Sem2', '2017_Sem1', '2017_Sem2'],
             faculty_filter: ['All', 'SOC', 'FASS', 'SDE', 'BIZ', 'Science'],
-            cap_filter: ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5']
+            cap_filter: ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5'],
+            similarStudentsFlag: false
         }
     },
     methods: {

@@ -13,7 +13,6 @@
     <v-navigation-drawer
         temporary
         v-model="drawer"
-        :mini-variant="mini"
         light
         absolute
     >

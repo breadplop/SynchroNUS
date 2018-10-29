@@ -12,11 +12,21 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Industry</h3>
-                <bar-chart title="Job Search Channels by Industry" :stacked="true" :data=this.industry_jobchannels></bar-chart>
+                <bar-chart 
+                    title="Job Search Channels by Industry" 
+                    :stacked="true" 
+                    :data=this.industry_jobchannels
+                    :library="{chart: {backgroundColor: ''}}"
+                ></bar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Job Search Channels by Job Title</h3>
-                <bar-chart title="Job Search Channels by Job Title" :stacked="true" :data=this.occupation_jobchannels></bar-chart>
+                <bar-chart 
+                    title="Job Search Channels by Job Title" 
+                    :stacked="true" 
+                    :data=this.occupation_jobchannels
+                    :library="{chart: {backgroundColor: ''}}"
+                ></bar-chart>
             </v-flex>
         </v-layout>
         <br>
@@ -27,15 +37,29 @@
             <v-flex xs15 sm12>
                 <h3>Amount of time to get a job offer</h3>
                 <v-subheader>What is the average time to get a job offer by job search channel?</v-subheader>
-                <line-chart title="Amount of time to get job offer" xtitle="No. of Weeks" :data=this.time_jobchannels></line-chart>
+                <line-chart 
+                    title="Amount of time to get job offer" 
+                    xtitle="No. of Weeks" 
+                    :data=this.time_jobchannels
+                    :library="{chart: {backgroundColor: ''}}"
+                ></line-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm12>
                 <h3>Month of start of job search</h3>
                 <v-subheader>When is the best time to start looking for jobs?</v-subheader>
-                <line-chart title="Month of start of job search" xtitle="Month" :stacked="true" :data=this.month_jobchannels></line-chart>
-                <geo-chart :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"></geo-chart>
+                <line-chart 
+                    title="Month of start of job search" 
+                    xtitle="Month" 
+                    :stacked="true" 
+                    :data=this.month_jobchannels
+                    :library="{chart: {backgroundColor: ''}}"
+                ></line-chart>
+                <geo-chart 
+                    :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"
+                    
+                ></geo-chart>
 
             </v-flex>
         </v-layout>
