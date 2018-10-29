@@ -9,7 +9,13 @@
         <h2>How does CAP affect Income</h2>
         <v-layout row wrap>
             <v-flex xs12 sm12>
-            <scatter-chart title="Avg Income Level VS CAP" xtitle="CAP" ytitle='Avg Income Level' :data="[[4.13, 5000],[4.5, 4200],[4.5, 4200],[4.0, 4200],[4.65, 5200],[3.8, 4000],[3.65, 3800],[3.3, 3500],[4.24, 5100]]"></scatter-chart>
+            <scatter-chart 
+                title="Avg Income Level VS CAP" 
+                xtitle="CAP" 
+                ytitle='Avg Income Level' 
+                :data="[[4.13, 5000],[4.5, 4200],[4.5, 4200],[4.0, 4200],[4.65, 5200],[3.8, 4000],[3.65, 3800],[3.3, 3500],[4.24, 5100]]"
+                :library="{chart: {backgroundColor: ''}}"
+            ></scatter-chart>
             </v-flex>
         </v-layout>
 <!--first row-->        
@@ -20,12 +26,18 @@
         <v-layout row wrap>
             <v-flex xs15 sm6>
                 <h3>Count by Industry</h3>
-                <pie-chart :data="data.count_job_title_ck.data"></pie-chart>
+                <pie-chart 
+                    :data="data.count_job_title_ck.data"
+                    :library="{chart: {backgroundColor: ''}}"
+                ></pie-chart>
                 
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Count by Job Title</h3>
-                <pie-chart :data="data.count_industry_ck.data"></pie-chart>
+                <pie-chart 
+                    :data="data.count_industry_ck.data"
+                    :library="{chart: {backgroundColor: ''}}"
+                ></pie-chart>
             </v-flex>
         </v-layout>
         <br>
@@ -36,27 +48,47 @@
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Relevance by Industry</h3>
-                <bar-chart title="Relevance by Industry" xtitle="Relevance Score" :min="0" :max="5" :data="data.relevance_industry_ck.data"></bar-chart>
+                <bar-chart 
+                    title="Relevance by Industry" 
+                    xtitle="Relevance Score" 
+                    :min="0" 
+                    :max="5" 
+                    :data="data.relevance_industry_ck.data"
+                    :library="{chart: {backgroundColor: ''}}"
+                ></bar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Relevance by Job Title</h3>
-                <bar-chart title="Relevance by Job Title" xtitle="Relevance Score" :min="0" :max="5" :data="data.relevance_job_title_ck.data"></bar-chart>
+                <bar-chart 
+                    title="Relevance by Job Title" 
+                    xtitle="Relevance Score" 
+                    :min="0" :max="5" 
+                    :data="data.relevance_job_title_ck.data"
+                    :library="{chart: {backgroundColor: ''}}"
+                ></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Industry</h3>
-                <bar-chart title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_industry_ck.data"></bar-chart>
+                <bar-chart 
+                    title="Preparedness by Industry" 
+                    xtitle="Preparedness Score" 
+                    :min="0" 
+                    :max="5" 
+                    :data="data.preparedness_industry_ck.data"
+                    :library="{chart: {backgroundColor: ''}}"
+                ></bar-chart>
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Job Title</h3>
-                <bar-chart title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_job_title_ck.data"></bar-chart>
+                <bar-chart :library="{chart: {backgroundColor: ''}}" title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_job_title_ck.data"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
             <v-flex xs15 sm10>
                 <h3>Income Level by Job Title</h3>
-                <bar-chart title="Income Level by Job Title" :stacked="true" :data=data.income_by_job_title_ck.data></bar-chart>
+                <bar-chart :library="{chart: {backgroundColor: ''}}" title="Income Level by Job Title" :stacked="true" :data=data.income_by_job_title_ck.data></bar-chart>
             </v-flex>
         </v-layout>
     </v-container>
