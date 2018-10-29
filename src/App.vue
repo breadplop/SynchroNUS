@@ -1,10 +1,16 @@
 <template>
   <v-app>
-    <v-toolbar color="indigo darken-3" dark>
+    <v-toolbar color="" dark v-bind:class="this.enhanced? '':'indigo darken-3'">
       <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
       <v-toolbar-title>{{currentRoute}}</v-toolbar-title>
       <v-spacer></v-spacer>
+
       <v-toolbar-items>
+        <v-btn>Enhanced version &nbsp; <v-switch
+          :key="enhanced"
+          v-model='enhanced'
+          style="padding-top:20px;"
+        ></v-switch></v-btn>
         <v-btn flat dark>Search</v-btn>
         <v-btn flat dark>Home</v-btn>
         <v-btn flat dark>Logout</v-btn>
@@ -13,7 +19,6 @@
     <v-navigation-drawer
         temporary
         v-model="drawer"
-        :mini-variant="mini"
         light
         absolute
     >
@@ -39,7 +44,7 @@
             sub-group
             value="true"
           >
-            <v-list-tile slot="activator">
+            <v-list-tile slot="activator" :key="'Module Information'" :to="'/module-information'">
               <v-list-tile-title>Module Planning</v-list-tile-title>
             </v-list-tile>
   
@@ -82,6 +87,7 @@
             no-action
             sub-group
             value="true"
+            v-if="enhanced"
           >
             <v-list-tile slot="activator" :key="'Exchange Page'" :to="'/exchange-page'">
               <v-list-tile-title>Exchange</v-list-tile-title>
@@ -89,28 +95,6 @@
   
             <v-list-tile
               v-for="(admin, i) in sep_subclass"
-              :key="i"
-              :to="admin[2]"
-            >
-              <v-list-tile-title v-text="admin[0]"></v-list-tile-title>
-              <v-list-tile-action>
-                <v-icon v-text="admin[1]"></v-icon>
-              </v-list-tile-action>
-            </v-list-tile>
-          </v-list-group>
-
-        <!-- templates_subclass group -->
-          <v-list-group
-            no-action
-            sub-group
-            value="true"
-          >
-            <v-list-tile slot="activator">
-              <v-list-tile-title>Exchange</v-list-tile-title>
-            </v-list-tile>
-  
-            <v-list-tile
-              v-for="(admin, i) in templates_subclass"
               :key="i"
               :to="admin[2]"
             >
@@ -141,6 +125,7 @@ export default {
   name: "App",
   data() {
     return {
+      enhanced:false,
       drawer: false,
       module_subclass: [
       ['Module Review', 'school', '/module-review'],

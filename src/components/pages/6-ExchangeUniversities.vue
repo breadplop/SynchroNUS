@@ -33,7 +33,6 @@
         </v-layout>
 
         <p>Number of students who went on exchange to <b>{{default_country[defaults.region]}}</b> in <b>{{defaults.semester}}</b></p>
-
         <v-card class="pa-3">
           <bar-chart :colors="['#bab9df', '#aac7e2']" :data='exchange_uni_student_count' :stacked="true"></bar-chart>
         </v-card>
@@ -51,6 +50,8 @@
     components: {
       VContent
     },
+    props: ['chosen_region'],
+    chosen_region: 'chosen_region',
     data() {
       return {
         display_options: ['My course', 'My faculty', 'Whole of NUS'],
@@ -84,7 +85,7 @@
         south_america_list: ['All countries in South America', 'Argentina', 'Bolivia', 'Brazil', 'Chile', 'Colombia', 'Ecuador', 'Guyana', 'Paraguay', 'Peru', 'Suriname', 'Uruguay', 'Venezuela'],
         default_country: {'All continents':'All countries', 'Africa': 'All countries in Africa', 'Asia': 'All countries in Asia', 'Australia (Oceania)': 'All countries in Australia (Oceania)', 'Europe':'All countries in Europe', 'North America': 'All countries in North America', 'South America': 'All countries in South America' },
         semester_list: ['AY14/15 to AY18/19','AY17/18 Sem 2','AY17/18 Sem 1','AY16/17 Sem 2','AY16/17 Sem 1','AY15/16 Sem 2','AY15/16 Sem 1','AY14/15 Sem 2','AY14/15 Sem 1'],
-        defaults:{'display': 'My course','university':'KTH', 'module_type':'My core modules', 'region':'All continents', 'country':'All countries', 'semester': 'AY14/15 to AY18/19'},
+        defaults:{'display': 'My course','university':'KTH', 'module_type':'My core modules', 'region':this.chosen_region, 'country':'All countries', 'semester': 'AY14/15 to AY18/19'},
         exchange_universities_filter_url:"https://j4e862m1ei.execute-api.us-west-2.amazonaws.com/default/Synchronus_exchange_universities?",
         exchange_modules: [{name: "Pass", data: [["BT3102 | DD2447",32],["1",46],["2",28],["3",21],["4",20],["5",13],["6",27]]}, {name: "Fail", data: [["BT3102 | DD2447",2],["1",4],["2",2],["3",1],["4",2],["5",3],["6",0]]}],
         cards: [
@@ -94,8 +95,8 @@
           { title: 'Australia (Oceania)', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3 },
           { title: 'Europe', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 3},
           { title: 'North America', src: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg', flex: 3},
-          { title: 'South America', src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg', flex: 3}
-        ]
+          { title: 'South America', src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg', flex: 3},
+          ]
       }
     },
     computed: {
@@ -122,7 +123,10 @@
         return this.route_titles[route]
       },
       fillData() {
-        this.filter_exchange_universities('All continents', 'All countries', 'AY14/15 to AY 18/19');
+        // console.log(this.chosen_region);
+        this.default_country = {'All continents':'All countries', 'Africa': 'All countries in Africa', 'Asia': 'All countries in Asia', 'Australia (Oceania)': 'All countries in Australia (Oceania)', 'Europe':'All countries in Europe', 'North America': 'All countries in North America', 'South America': 'All countries in South America' };
+
+        this.filter_exchange_universities(this.chosen_region, this.default_country[this.chosen_region], 'AY14/15 to AY 18/19');
       }
     }
   };

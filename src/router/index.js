@@ -12,6 +12,7 @@ import JobSearchFour from '@/components/pages/4-JobSearch'
 import ExchangePageFive from '@/components/pages/5-ExchangePage'
 import ExchangeUniversitiesSix from '@/components/pages/6-ExchangeUniversities'
 import ExchangeModulesSeven from '@/components/pages/7-ExchangeModules'
+import ModuleInformationEight from '@/components/pages/8-ModuleInformation'
 
 
 Vue.use(Router)
@@ -80,6 +81,12 @@ export default new Router({
       name: 'Exchange Modules',
       component: ExchangeModulesSeven,
       props: true
-    }                                  
+    },
+    {
+      path: '/module-information',
+      name: 'Module Information',
+      component: ModuleInformationEight,
+      props: true
+    }
   ]
 })
