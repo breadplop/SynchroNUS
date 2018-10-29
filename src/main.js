@@ -49,9 +49,11 @@ Vue.use(Vuetify, {
 
 import VueChartkick from 'vue-chartkick'
 import Highcharts from 'highcharts'
+import VueFire from 'vuefire'
 
 Vue.use(VueChartkick, {adapter: Highcharts})
 Vue.use(router)
+Vue.use(VueFire)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

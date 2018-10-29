@@ -1,3 +1,31 @@
+
+// // Initialize Firebase
+// import Firebase from 'firebase'
+
+// var config = {
+//     apiKey: "AIzaSyAcQY0MNvaO3jJ1Lj-NmssIdcwzOuelNB4",
+//     authDomain: "orange-cake.firebaseapp.com",
+//     databaseURL: "https://orange-cake.firebaseio.com",
+//     projectId: "orange-cake",
+//     storageBucket: "orange-cake.appspot.com",
+//     messagingSenderId: "342044918777"
+//   };
+
+// let app = Firebase.initializeApp(config);
+// let db = app.database();
+
+
+// //firebase collections
+// const dataRef = db.ref('charts/barData2')
+
+// export {
+//     dataRef,
+//     db
+// } 
+
+
+
+////////////
 // Initialize Firebase
 import Firebase from 'firebase'
 
@@ -10,16 +38,15 @@ storageBucket: "bt3103-synchronus.appspot.com",
 messagingSenderId: "832030929818"
 };
 
-//let db = firebase.firestore()
 let app = Firebase.initializeApp(config);
 let db = app.database();
 
 
 //firebase collections
-const dataRef2 = db.ref('teaching_review/t1/nofilter2');
+const dataRef = db.ref('charts/m1/nofilter/data');
+//const dataRef = db.ref('charts/barData2')
 
-export default dataRef2
-// export {
-//     db,
-//     dataRef2
-// }
+export {
+    dataRef,
+    db
+} 
