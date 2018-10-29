@@ -1,8 +1,9 @@
 <template>
 <v-app light>
 <v-content>
-    <filters></filters>
     <v-container id='1' grid-list-xl>
+        <h1>{{module}}</h1>
+        <filters></filters>
 <!--first row-->        
         <!--MCQ questions -->
         <v-header><h2>Opinions on Teaching</h2></v-header>
@@ -10,15 +11,15 @@
         <v-layout row wrap>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has enhanced my thinking ability.</h3>
-                <bar-chart :data="data.t1_data_ck.data"></bar-chart>
+                <bar-chart :data="data.t1_data_ck.data" :options='this.options' :library='this.library'></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher provided timely and useful feedback.</h3>
-                <bar-chart :data="data.t2_data_ck.data"></bar-chart>
+                <bar-chart :data="data.t2_data_ck.data" :library="this.library"></bar-chart>
             </v-flex>
             <v-flex xs15 sm4>
                 <h3>Qn: The teacher has increased my interest in the subject.</h3>
-                <bar-chart :data="data.t3_data_ck.data"></bar-chart>
+                <bar-chart :data="data.t3_data_ck.data" :library="this.library"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
@@ -28,7 +29,7 @@
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Nominated for teaching awards</h3>
-                <line-chart :data="data.t7c_data_ck.data"></line-chart>
+                <line-chart :data="data.t7c_data_ck.data" :library="this.library" ></line-chart>
             </v-flex>
         </v-layout>
     </v-container>
@@ -48,6 +49,10 @@
     data () {
       return {
         datacollection: null,
+        module: 'BT1123 Introduction to Big Data',
+        library: {
+        chart: {backgroundColor: ''},
+        },
         data: {
             t1_data_ck: {
                 name: 't1_data', 

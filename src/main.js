@@ -48,8 +48,9 @@ Vue.use(Vuetify, {
 })
 
 import VueChartkick from 'vue-chartkick'
+import Highcharts from 'highcharts'
 
-Vue.use(VueChartkick)
+Vue.use(VueChartkick, {adapter: Highcharts})
 Vue.use(router)
 Vue.config.productionTip = false
 
