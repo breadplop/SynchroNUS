@@ -49,7 +49,7 @@
     data () {
       return {
         datacollection: null,
-        module: 'BT1123 Introduction to Big Data',
+        module: 'ACC2002 Managerial Accounting',
         library: {
         chart: {backgroundColor: ''},
         },

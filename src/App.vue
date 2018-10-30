@@ -44,7 +44,10 @@
             sub-group
             value="true"
           >
-            <v-list-tile slot="activator" :key="'Module Information'" :to="'/module-information'">
+            <v-list-tile v-if="enhanced" slot="activator" :key="'Module Information'" :to="'/module-information'">
+              <v-list-tile-title>Module Planning</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="!enhanced" slot="activator" :key="'Module Information'" :to="'/module-information-basic'">
               <v-list-tile-title>Module Planning</v-list-tile-title>
             </v-list-tile>
   

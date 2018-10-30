@@ -1,9 +1,9 @@
 <template>
 <v-app light>
 <v-content>
-    <v-container id='1' grid-list-xl>
-        <!--<filters></filters>-->
-    </v-container>
+    <!--<v-container id='1' grid-list-xl>-->
+        <!--&lt;!&ndash;<filters></filters>&ndash;&gt;-->
+    <!--</v-container>-->
     <v-container id='1' grid-list-xl>
         <h1>{{module}}</h1>  
         <v-layout row wrap mb-5>
@@ -113,7 +113,7 @@
     data () {
       return {
         datacollection: null,
-        module: 'BT1123 Introduction to Big Data',
+        module: 'ACC2002 Managerial Accounting',
         similarStudentsFlag: false,
         filtered: {semesters_filter: 'All Semesters', faculty_filter: 'All Faculties', cap_filter: 'All Cap'},
         info: {

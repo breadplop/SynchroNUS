@@ -55,11 +55,7 @@
                     :stacked="true" 
                     :data=this.month_jobchannels
                     :library="{chart: {backgroundColor: ''}}"
-                ></line-chart>
-                <geo-chart 
-                    :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"
-                    
-                ></geo-chart>
+                ></line-chart>-->
 
             </v-flex>
         </v-layout>
