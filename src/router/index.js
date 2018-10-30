@@ -13,6 +13,7 @@ import ExchangePageFive from '@/components/pages/5-ExchangePage'
 import ExchangeUniversitiesSix from '@/components/pages/6-ExchangeUniversities'
 import ExchangeModulesSeven from '@/components/pages/7-ExchangeModules'
 import ModuleInformationEight from '@/components/pages/8-ModuleInformation'
+import ModuleInformationNine from '@/components/pages/9-ModuleInformationBasic'
 
 
 Vue.use(Router)
@@ -21,7 +22,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'SynchroNUS',
       component: HelloWorld
     },
     {
@@ -86,6 +87,12 @@ export default new Router({
       path: '/module-information',
       name: 'Module Information',
       component: ModuleInformationEight,
+      props: true
+    },
+    {
+      path: '/module-information-basic',
+      name: 'Module Information',
+      component: ModuleInformationNine,
       props: true
     }
   ]

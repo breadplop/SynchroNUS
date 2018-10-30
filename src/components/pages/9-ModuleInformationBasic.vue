@@ -16,29 +16,15 @@
             <v-btn v-if="selected_module" color="secondary" :to="'https://nusmods.com/modules/ACC2002/managerial-accounting'">View more information of {{selected_module}} on NUSMods</v-btn>
             <v-btn v-if="selected_module" color="info" :to="'/module-review'">View past module reviews for {{selected_module}}</v-btn>
             <v-btn v-if="selected_module" color="info" :to="'/teaching-review'">View past teaching reviews for {{selected_module}}</v-btn>
-            <v-btn v-if="selected_module" color="success" v-on:click="add_module(selected_module)">Add {{selected_module}} to workload planning</v-btn>
 
           </v-flex>
           <v-flex xs12 sm5 offset-sm2 v-if="selected_module">
-            <h3><v-icon >videocam</v-icon> {{selected_module}} is likely to be webcasted.</h3>
-            <p>There were {{this.getRandomInt()}} videos the last time the module was offered with a {{this.getRandomInt()*10}}% viewing rate.</p>
-
-            <h3>Students that exercised their S/U option on {{selected_module}} the last time it was offered</h3>
-            <pie-chart :data="[['S/U option exercised', this.getRandomIntSU()], ['Did not S/U', this.getRandomIntSU()]]"></pie-chart>
+    <h3>Percentage of students that exercised their S/U option on {{selected_module}} the last time it was offered</h3>
+            <pie-chart :data="[['S/U option exercised', 44], ['Did not S/U', 23]]"></pie-chart>
           </v-flex>
         </v-layout>
 
-        <v-divider></v-divider>
 
-        <v-layout row wrap class="mt-5">
-          <v-flex xs15 sm12>
-            <h3>Combined estimated workload across the weeks(scale of 1-10 for each module)</h3>
-            <v-subheader>When are the submission dates?</v-subheader>
-
-            <area-chart :data='workload_data' height="300px" :stacked="true" ></area-chart>
-
-          </v-flex>
-        </v-layout>
 
       </v-container>
 
@@ -66,9 +52,6 @@
       },
       getRandomInt () {
         return Math.floor(Math.random() * (10))
-      },
-      getRandomIntSU() {
-        return Math.floor(Math.random() * 100)
       },
       show_module_information(module_code) {
         this.selected_module = module_code;

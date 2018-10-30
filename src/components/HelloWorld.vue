@@ -1,37 +1,79 @@
 <template>
-  <v-container fluid>
-    <v-slide-y-transition mode="out-in">
-      <v-layout column align-center>
-        <img src="@/assets/logo.png" alt="Vuetify.js" class="mb-5">
-        <v-btn><router-link to='template'>CLICK HERE (to template)</router-link></v-btn>
-        <blockquote>
-          &#8220;First, solve the problem. Then, write the code.&#8221;
-          <footer>
-            <small>
-              <em>&mdash;John Johnson was hwer</em>
-            </small>
-            <v-btn><router-link to='bye'>go to bye world</router-link></v-btn>
-          </footer>
-        </blockquote>
-      </v-layout>
-    </v-slide-y-transition>
-  </v-container>
+  <v-app light>
+    <v-content>
+      <v-container grid-list-xl>
+
+        <h3> Hi John, what would you like to do today?  </h3>
+
+        <v-layout row wrap>
+          <v-flex
+            v-for="card in cards"
+            v-bind="{ [`xs${card.flex}`]: true }"
+            :key="card.title"
+          >
+            <v-card style="border-radius: 10px; cursor: pointer;">
+              <v-img
+                :src="card.src"
+                height="250px"
+                v-on:click="navigate(card.url)"
+                :chosen_region="card.title"
+              >
+                <v-container
+                  fill-height
+                  fluid
+                  pa-2
+                  style="background-color:#443f3f59"
+                >
+                  <v-layout fill-height>
+                    <v-flex xs12 align-end flexbox pt-5 style="text-align: center;">
+                      <span class="headline white--text" v-text="card.title"></span>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </v-card>
+          </v-flex>
+        </v-layout>
+
+
+      </v-container>
+    </v-content>
+  </v-app>
+
+
 </template>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<script>
+  import router from '../router'
+
+  export default {
+    components: {
+      router
+    },
+    data() {
+      return {
+        cards: [
+          { title: 'Module Planning', url:'/module-information-basic', src: 'http://digitallearning.eletsonline.com/wp-content/uploads/2018/04/School-Education-Transformation-Paving-Way-for-Better-Higher-Education.jpg', flex: 4},
+          { title: 'Career Planning', url:'/career-prospects', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9aqyQZC6kF0glKq1zltpi3OrfsA6J-49td6CJYFkI-noymqrP', flex: 4 },
+        ],
+      }
+    },
+    computed: {
+      currentRoute () {
+        // We will see what `params` is shortly
+        return this.$route.path
+      },
+    },
+    mounted () {
+    },
+    methods:{
+      title: function(route) {
+        return this.route_titles[route]
+      },
+      navigate: function(url){
+        router.push({path:url});
+      },
+    }
+  };
+
+</script>

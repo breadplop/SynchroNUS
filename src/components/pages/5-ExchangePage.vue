@@ -15,12 +15,12 @@
             ></v-overflow-btn>
           </v-flex>
 
-          <!--<v-flex xs12 sm2>-->
-            <!--<v-btn color="info" v-on:click="filter_exchange_universities(defaults.region)">Go!</v-btn>-->
-          <!--</v-flex>-->
+          <v-flex xs12 sm2>
+            <v-btn color="info" v-on:click="filter_exchange_universities(defaults.region)">Go!</v-btn>
+          </v-flex>
         </v-layout>
 
-        <h4> Search universities by region </h4>
+        <h3> Search universities by region </h3>
 
         <v-layout row wrap>
           <v-flex
@@ -51,7 +51,7 @@
             </v-card>
           </v-flex>
         </v-layout>
-        <geo-chart :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"></geo-chart>
+        <geo-chart :data="[['United States', 26], ['Canada',10], ['Nigeria',2], ['Indonesia',5], ['China', 12], ['Thailand',5], ['Turkey',3], ['Australia',13], ['Russia',3], ['Germany', 8], ['Sweden',10], ['Brazil', 22]]"></geo-chart>
 
 
       </v-container>
@@ -76,7 +76,7 @@
     },
     data() {
       return {
-        universities_list: ['KTH', 'Technical University of Munich', 'ETH Zurich'],
+        universities_list: ['Royal Institute of Technology (KTH)', 'Technical University of Munich', 'Peking University'],
         exchange_uni_student_count: {},
         exchange_universities_filter_url:"https://j4e862m1ei.execute-api.us-west-2.amazonaws.com/default/Synchronus_exchange_universities?",
         default_country: {'All continents':'All countries', 'Africa': 'All countries in Africa', 'Asia': 'All countries in Asia', 'Australia (Oceania)': 'All countries in Australia (Oceania)', 'Europe':'All countries in Europe', 'North America': 'All countries in North America', 'South America': 'All countries in South America' },
