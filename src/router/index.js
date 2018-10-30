@@ -22,7 +22,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
+      name: 'SynchroNUS',
       component: HelloWorld
     },
     {
