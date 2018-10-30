@@ -82,7 +82,7 @@
             </v-flex>
             <v-flex xs15 sm6>
                 <h3>Preparedness by Job Title</h3>
-                <bar-chart :library="{chart: {backgroundColor: ''}}" title="Preparedness by Industry" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_job_title_ck.data"></bar-chart>
+                <bar-chart :library="{chart: {backgroundColor: ''}}" title="Preparedness by Job Title" xtitle="Preparedness Score" :min="0" :max="5" :data="data.preparedness_job_title_ck.data"></bar-chart>
             </v-flex>
         </v-layout>
         <v-layout>
