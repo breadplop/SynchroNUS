@@ -23,8 +23,8 @@
             <h3><v-icon >videocam</v-icon> {{selected_module}} is likely to be webcasted.</h3>
             <p>There were {{this.getRandomInt()}} videos the last time the module was offered with a {{this.getRandomInt()*10}}% viewing rate.</p>
 
-            <h3>Percentage of students that exercised their S/U option on {{selected_module}} the last time it was offered</h3>
-            <pie-chart :data="[['S/U option exercised', 44], ['Did not S/U', 23]]"></pie-chart>
+            <h3>Students that exercised their S/U option on {{selected_module}} the last time it was offered</h3>
+            <pie-chart :data="[['S/U option exercised', this.getRandomIntSU()], ['Did not S/U', this.getRandomIntSU()]]"></pie-chart>
           </v-flex>
         </v-layout>
 
@@ -66,6 +66,9 @@
       },
       getRandomInt () {
         return Math.floor(Math.random() * (10))
+      },
+      getRandomIntSU() {
+        return Math.floor(Math.random() * 100)
       },
       show_module_information(module_code) {
         this.selected_module = module_code;
