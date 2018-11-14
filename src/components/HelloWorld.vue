@@ -11,7 +11,7 @@
             v-bind="{ [`xs${card.flex}`]: true }"
             :key="card.title"
           >
-            <v-card style="border-radius: 10px; cursor: pointer;">
+            <v-card v-if="!(card.title=='Exchange Planning' && !enhanced)" style="border-radius: 10px; cursor: pointer;">
               <v-img
                 :src="card.src"
                 height="250px"
@@ -47,6 +47,7 @@
   import router from '../router'
 
   export default {
+    props:['enhanced'],
     components: {
       router
     },
@@ -55,12 +56,12 @@
         cards: [
           { title: 'Module Planning', url:'/module-information-basic', src: 'http://digitallearning.eletsonline.com/wp-content/uploads/2018/04/School-Education-Transformation-Paving-Way-for-Better-Higher-Education.jpg', flex: 4},
           { title: 'Career Planning', url:'/career-prospects', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9aqyQZC6kF0glKq1zltpi3OrfsA6J-49td6CJYFkI-noymqrP', flex: 4 },
+          { title: 'Exchange Planning', url:'/exchange-page', src: 'https://www.fueltravel.com/wp-content/uploads/2016/03/travel-planning-1.jpg', flex: 4 },
         ],
       }
     },
     computed: {
       currentRoute () {
-        // We will see what `params` is shortly
         return this.$route.path
       },
     },

@@ -44,10 +44,7 @@
             sub-group
             value="true"
           >
-            <v-list-tile v-if="enhanced" slot="activator" :key="'Module Information'" :to="'/module-information'">
-              <v-list-tile-title>Module Planning</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile v-if="!enhanced" slot="activator" :key="'Module Information'" :to="'/module-information-basic'">
+            <v-list-tile slot="activator" :key="'Module Information'" :to="'/module-information'">
               <v-list-tile-title>Module Planning</v-list-tile-title>
             </v-list-tile>
   
@@ -114,7 +111,7 @@
          
     </v-navigation-drawer>
     <v-content>
-      <router-view/>
+      <router-view :enhanced="this.enhanced" />
     </v-content>
   </v-app>
   
@@ -141,11 +138,6 @@ export default {
       sep_subclass: [
         ['Exchange Universities', 'edit_location', '/exchange-universities'],
         ['Exchange Modules', 'layers', '/exchange-modules']
-      ],
-      templates_subclass: [
-        ['Templates', 'build', '/template'],
-        ['New Charts', 'bar_chart', '/template-graphs'],
-        ['Playground', 'delete', '/playground']
       ]
     }
   },
