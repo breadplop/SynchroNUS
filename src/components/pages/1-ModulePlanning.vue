@@ -60,6 +60,9 @@
         <!--MCQ questions -->
         <h2>Opinions of Module: {{module}}</h2>
         <p style='color:red'>{{loading}}</p>
+        <div class='tooltip' style='color:red'>{{error}}
+            <span class='tooltiptext'>Please remember to use all filters!</span>
+        </div>
         <br>
         <v-layout row wrap>
             <v-flex xs15 sm4>
@@ -153,7 +156,7 @@
             trueFlag: [['A', 40], ['B', 102], ['C', 78], ['D', 30], ['F', 10]],
             falseFlag: [['A', 70], ['B', 132], ['C', 88], ['D', 70], ['F', 40]]
         },
-        errored: false,
+        error: '',
         loading: '',
         data: {
             m1_data_ck: {
@@ -256,43 +259,49 @@
                 })
         },
         fetchUrl: async function(filter_params) {
-            this.loading = 'We are pulling and aggregating the results right now...'
-            console.log('filter_params.semesters_filter = ' + filter_params.semesters_filter)
-            console.log('find semesterfilters ' + this.semesters_filter)
-            let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
-            console.log('sem_pram=' + sem_param)
-            let cap_param = filter_params.semesters_filter
-            let faculty_param = filter_params.faculty_filter
-            let module_param = filter_params.module_filter
-            // let queryParam = '?semester=' + sem_param + '&cap=' + cap_param + '&faculty=' + faculty_param
-            let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/test?' //term=1710&'
-            let urlToFetch = url + $.param({module:module_param, term:sem_param}) 
-            let res = await fetch(urlToFetch + '&question=m1');
-            console.log(urlToFetch + '&question=m1')
-            //console.log('param is=' + $.param({semester:sem_param,cap:cap_param,faculty:faculty_param}))
-            let theJson = await res.json()
-            this.info.trueFlag = theJson
-            this.info.falseFlag = theJson
-            console.log(theJson)
-            
-            //for second chart
-            this.loading = 'Still aggregating. We are almost done, please bear with us!'  
-            // let res2 = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus?');
-            let res2 = await fetch(urlToFetch + '&question=m2');
-            let theJson2 = await res2.json()
-            this.rateModInfo.trueFlag = theJson2
-            this.rateModInfo.falseFlag = theJson2
-
-            //third chart
-            this.loading = 'Last chart, hang in there.'
-            // let res3 = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus?grade_chart=3');
-            let res3 = await fetch(urlToFetch + '&question=m3');
-            let theJson3 = await res3.json()
-            this.m2_data_ck.trueFlag = theJson3
-            this.m2_data_ck.falseFlag = theJson3
-            this.loading = 'Results are now fully loaded!'
-            router.push(this.$route.path + '?completed') // + '/?' + $.param({module:module_param, semester:sem_param,cap:cap_param,faculty:faculty_param}))
-            
+            try {
+                
+                this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+                console.log('filter_params.semesters_filter = ' + filter_params.semesters_filter)
+                console.log('find semesterfilters ' + this.semesters_filter)
+                let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
+                console.log('sem_pram=' + sem_param)
+                let cap_param = filter_params.semesters_filter
+                let faculty_param = filter_params.faculty_filter
+                let module_param = filter_params.module_filter
+                // let queryParam = '?semester=' + sem_param + '&cap=' + cap_param + '&faculty=' + faculty_param
+                let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/test?' //term=1710&'
+                let urlToFetch = url + $.param({module:module_param, term:sem_param}) 
+                let res = await fetch(urlToFetch + '&question=m1');
+                console.log(urlToFetch + '&question=m1')
+                //console.log('param is=' + $.param({semester:sem_param,cap:cap_param,faculty:faculty_param}))
+                let theJson = await res.json()
+                this.info.trueFlag = theJson
+                this.info.falseFlag = theJson
+                console.log(theJson)
+                
+                //for second chart
+                this.loading = 'Still aggregating. We are almost done, please bear with us!'  
+                // let res2 = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus?');
+                let res2 = await fetch(urlToFetch + '&question=m2');
+                let theJson2 = await res2.json()
+                this.rateModInfo.trueFlag = theJson2
+                this.rateModInfo.falseFlag = theJson2
+    
+                //third chart
+                this.loading = 'Last chart, hang in there.'
+                // let res3 = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus?grade_chart=3');
+                let res3 = await fetch(urlToFetch + '&question=m3');
+                let theJson3 = await res3.json()
+                this.m2_data_ck.trueFlag = theJson3
+                this.m2_data_ck.falseFlag = theJson3
+                this.loading = 'Results are now fully loaded!'
+                router.push(this.$route.path + '?completed') // + '/?' + $.param({module:module_param, semester:sem_param,cap:cap_param,faculty:faculty_param}))
+                
+            } catch (error) {
+                this.loading = ''
+                this.error = 'ERROR.'
+            }
 
         }
     }

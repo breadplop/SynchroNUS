@@ -4,7 +4,7 @@
     <!-- <v-container id='1' grid-list-xl>
         <h1>{{module}}</h1> {{hello}} -->
         <!-- <filters hello="hellobye"></filters> -->
-    <v-container id='1' grid-list-xl>
+    <v-container id='2' grid-list-xl>
         <h1>{{module}}</h1>  
         <br>
         <p>Please use all filters </p>
@@ -64,6 +64,9 @@
         <h2>Opinions on Teaching: {{module}}</h2>
 
         <p style='color:red'>{{loading}}</p>
+        <div class='tooltip' style='color:red'>{{error}}
+            <span class='tooltiptext'>Please remember to use all filters!</span>
+        </div>
         <br>
         <v-layout row wrap>
             <v-flex xs15 sm4>
@@ -117,6 +120,8 @@
     },
     data () {
       return {
+        error: '',
+        loading: '',
         filtered: {semesters_filter: 'Pick Semesters', faculty_filter: 'Pick Faculties', cap_filter: 'Pick Cap', module_filter: 'Choose Module'},
         semesters_filter: {
                 'AY16/17 Sem 1' :  '1710',
@@ -232,7 +237,7 @@
       },
     
       fetchUrl: async function(filter_params) {
-        this.loading = 'We are pulling and aggregating the results right now...'  
+        this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
         console.log(filter_params)
         let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
         console.log('sem_pram=' + sem_param)

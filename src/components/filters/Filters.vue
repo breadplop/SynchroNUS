@@ -82,6 +82,7 @@ export default {
     },
     methods: {
         fetchUrl: async function(filter_params) {
+            console.log('hello can it see?')
             console.log('filter_params.semesters_filter = ' + filter_params.semesters_filter)
             console.log('find semesterfilters ' + this.semesters_filter)
             let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
