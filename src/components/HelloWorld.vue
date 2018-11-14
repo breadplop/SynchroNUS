@@ -54,7 +54,7 @@
     data() {
       return {
         cards: [
-          { title: 'Module Planning', url:'/module-information-basic', src: 'http://digitallearning.eletsonline.com/wp-content/uploads/2018/04/School-Education-Transformation-Paving-Way-for-Better-Higher-Education.jpg', flex: 4},
+          { title: 'Module Planning', url:'/module-information', src: 'http://digitallearning.eletsonline.com/wp-content/uploads/2018/04/School-Education-Transformation-Paving-Way-for-Better-Higher-Education.jpg', flex: 4},
           { title: 'Career Planning', url:'/career-prospects', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9aqyQZC6kF0glKq1zltpi3OrfsA6J-49td6CJYFkI-noymqrP', flex: 4 },
           { title: 'Exchange Planning', url:'/exchange-page', src: 'https://www.fueltravel.com/wp-content/uploads/2016/03/travel-planning-1.jpg', flex: 4 },
         ],
