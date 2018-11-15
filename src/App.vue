@@ -11,8 +11,7 @@
           v-model='enhanced'
           style="padding-top:20px;"
         ></v-switch></v-btn>
-        <v-btn flat dark>Search</v-btn>
-        <v-btn flat dark>Home</v-btn>
+        <v-btn flat dark :to="'/'">Home</v-btn>
         <v-btn flat dark>Logout</v-btn>
       </v-toolbar-items>
     </v-toolbar>

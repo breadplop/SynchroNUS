@@ -7,7 +7,6 @@
             <v-overflow-btn
               :items="region_list"
               label="Choose region"
-              target="#dropdown-example"
               v-model="defaults.region"
               @change="filter_exchange_universities(defaults.region, default_country[defaults.region], ay_val[defaults.ay], sem_val[defaults.sem])"
             ></v-overflow-btn>
@@ -16,7 +15,6 @@
             <v-overflow-btn
               :items="country_list[defaults.region]"
               label="Choose country"
-              target="#dropdown-example"
               v-model="default_country[defaults.region]"
               @change="filter_exchange_universities(defaults.region, default_country[defaults.region], ay_val[defaults.ay], sem_val[defaults.sem])"
             ></v-overflow-btn>
@@ -25,7 +23,6 @@
             <v-overflow-btn
               :items="ay_list"
               label="Choose AY"
-              target="#dropdown-example"
               v-model="defaults.ay"
               @change="filter_exchange_universities(defaults.region, default_country[defaults.region], ay_val[defaults.ay], sem_val[defaults.sem])"
             ></v-overflow-btn>
@@ -34,7 +31,6 @@
             <v-overflow-btn
               :items="sem_list"
               label="Choose semester"
-              target="#dropdown-example"
               v-model="defaults.sem"
               @change="filter_exchange_universities(defaults.region, default_country[defaults.region], ay_val[defaults.ay], sem_val[defaults.sem])"
             ></v-overflow-btn>
@@ -65,7 +61,6 @@
       VContent
     },
     props: ['chosen_region'],
-    chosen_region: 'chosen_region',
     data() {
       return {
         exchange_uni_student_count: {},
