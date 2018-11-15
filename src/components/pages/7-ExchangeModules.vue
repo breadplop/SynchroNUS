@@ -3,108 +3,53 @@
     <v-content>
       <v-container id="dropdown-example" grid-list-xl>
         <v-layout row wrap>
-          <v-flex xs12 sm4>
-            <v-overflow-btn
-              :items="display_options"
-              label="School of Computing"
-              target="#dropdown-example"
-              v-model="defaults.display"
-              @change="filter_exchange_modules(defaults.display, defaults.university, defaults.module_type)"
-            ></v-overflow-btn>
-          </v-flex>
-          <v-flex xs12 sm4>
+          <v-flex xs12 sm6>
             <v-overflow-btn
               :items="universities_list"
-              label="Filter university"
-              target="#dropdown-example"
+              label="Choose partner university"
               v-model="defaults.university"
-              @change="filter_exchange_modules(defaults.display, defaults.university, defaults.module_type)"
+              @change="filter_exchange_modules(defaults.university)"
             ></v-overflow-btn>
           </v-flex>
-          <v-flex xs12 sm4>
-            <v-overflow-btn
-              :items="module_list"
-              label="Filter type of modules"
-              target="#dropdown-example"
-              v-model="defaults.module_type"
-              @change="filter_exchange_modules(defaults.display, defaults.university, defaults.module_type)"
-            ></v-overflow-btn>
-          </v-flex>
-          <!--<v-flex xs12 sm1>-->
-          <!--<v-btn color="info" v-on:click="filter_exchange_modules(defaults.display,defaults.university,defaults.module_type)">Go!</v-btn>-->
-          <!--</v-flex>-->
         </v-layout>
-          <v-layout><bar-chart :data='this.exchange_modules[defaults.university]' :stacked="true"></bar-chart></v-layout>
-
-
+        <v-layout v-if="Object.keys(exchange_modules).length != 0"><bar-chart :data='this.exchange_modules' :stacked="true"></bar-chart></v-layout>
+        <div v-if="Object.keys(exchange_modules).length != 0">
         <h4><u>Information about {{defaults.university}}</u></h4><br/>
-          <p>Region: {{university_region}}</p>
-          <p>Country: {{university_country}}</p>
+          <p>Region: {{universities_data[defaults.university]['region']}}</p>
+          <p>Country: {{universities_data[defaults.university]['country']}}</p>
+        </div>
       </v-container>
     </v-content>
   </v-app>
-
-
 </template>
 
 <script>
-
   export default {
+    props: ['chosen_university'],
     components: {
     },
     data() {
       return {
-        options: {
-          scales: {
-            xAxes: [{ stacked: true}],
-            yAxes: [{ stacked: true}]
-          }
-        },
-        university_country: null,
-        university_region: null,
-
         display_options: ['My course', 'My faculty', 'Whole of NUS'],
-        universities_list: [],
-        exchange_uni_student_count: {},
-        students_course_data: [],
-        students_others_data: [],
+        universities_list: ['Columbia University', 'ETH Zurich', 'King\'s College London',
+          'Nanyang Technology University', 'National Taiwan University', 'New York University',
+          'Peking University','Pennsylvania State University','Purdue University', 'Seoul University',
+          'Technical University of Munich','The University of Hong Kong','Tokyo University','Tsing Hua University',
+          'University of California, Berkeley','University of California, Los Angeles','University of Copenhagen',
+          'University of Edinburgh','University of Lund','Yale University'],
+        universities_data: {'Columbia University':{region:'North America',country:'USA'}, 'ETH Zurich':{region:'Europe',country:'Switzerland'}, 'King\'s College London':{region:'Europe',country:'United Kingdom'},
+          'Nanyang Technology University':{region:'Asia',country:'Singapore'}, 'National Taiwan University':{region:'Asia',country:'Taiwan'}, 'New York University':{region:'North America',country:'USA'},
+          'Peking University':{region:'Asia',country:'China'},'Pennsylvania State University':{region:'North America',country:'USA'},'Purdue University':{region:'North America',country:'USA'}, 'Seoul University':{region:'Asia',country:'Korea'},
+          'Technical University of Munich':{region:'Europe',country:'Germany'},'The University of Hong Kong':{region:'Asia',country:'Hong Kong'},'Tokyo University':{region:'Asia',country:'Japan'},'Tsing Hua University':{region:'Asia',country:'China'},
+          'University of California, Berkeley':{region:'North America',country:'USA'},'University of California, Los Angeles':{region:'North America',country:'USA'},'University of Copenhagen':{region:'Europe',country:'Denmark'},
+          'University of Edinburgh':{region:'Europe',country:'United Kingdom'},'University of Lund':{region:'Europe',country:'Sweden'},'Yale University':{region:'North America',country:'USA'}},
+        exchange_modules: {},
         module_list: ['My core modules','Modules with prerequisites fulfilled', 'All modules'],
-        semester_list: ['AY14/15 to AY18/19','AY17/18 Sem 2','AY17/18 Sem 1','AY16/17 Sem 2','AY16/17 Sem 1','AY15/16 Sem 2','AY15/16 Sem 1','AY14/15 Sem 2','AY14/15 Sem 1'],
-        defaults:{'display': 'My course','university':'Royal Institute of Technology (KTH)', 'module_type':'My core modules', 'country':'All countries', 'semester': 'AY14/15 to AY18/19'},
-        // exchange_universities_filter_url:"https://j4e862m1ei.execute-api.us-west-2.amazonaws.com/default/synchronus?",
-        exchange_universities_filter_url:"https://j4e862m1ei.execute-api.us-west-2.amazonaws.com/default/Synchronus_exchange_universities?",
-        exchange_modules: {
-          'Royal Institute of Technology (KTH)': [{
-            name: "Pass",
-            data: [["BT3102 | DD2447", 32], ["CS3244 | DD2434", 46], ["DSC3214| SF1811", 28], ["BT3103 | ID2216", 21], ["BT4240 | ID2222", 20], ["BT4222 | ID2342", 13]]
-          },
-            {
-              name: "Fail",
-              data: [["BT3102 | DD2447", 3], ["CS3244 | DD2434", 4], ["DSC3214| SF1811", 2], ["BT3103 | ID2216", 2], ["BT4240 | ID2222", 0], ["BT4222 | ID2342", 3]]
-            }],
-          'Technical University of Munich': [{
-            name: "Pass",
-            data: [["BT3102 | IH447", 21], ["CS3214 | DT274", 26], ["DSC3214| PE151", 8], ["BT3103 | ID2314", 12], ["BT4240 | MK322", 13], ["BT4222 | DY942", 1]]
-          },
-            {
-              name: "Fail",
-              data: [["BT3102 | IH447", 4], ["CS3214 | DT274", 3], ["DSC3214| PE151", 2], ["BT3103 | ID2314", 2], ["BT4240 | MK322", 2], ["BT4222 | DY942", 1]]
-            }],
-          'Peking University': [{
-            name: "Pass",
-            data: [["BT3102 | DD2447", 5], ["CS3244 | DD2434", 16], ["DSC3214| SF1811", 8], ["BT3103 | ID2216", 10], ["BT4240 | ID2222", 30], ["BT4222 | ID2342", 12]]
-          },
-            {
-              name: "Fail",
-              data: [["BT3102 | DD2447", 1], ["CS3244 | DD2434", 3], ["DSC3214| SF1811", 0], ["BT3103 | ID2216", 6], ["BT4240 | ID2222", 4], ["BT4222 | ID2342", 0]]
-            }]
-        },
-        route_titles: {'/': 'Student Exchange Program (SEP) Planning', '/exchange_universities':'Exchange Universities', '/exchange_modules':'Module Mapping'}
-      }
+        defaults:{'university':this.chosen_university},
+        }
     },
     computed: {
       currentRoute () {
-        // We will see what `params` is shortly
         return this.$route.path
       },
       country_list() {
@@ -117,45 +62,16 @@
       this.fillData()
     },
     methods:{
-      filter_exchange_modules: async function (region, country, semester) {
-        let res = await fetch(this.exchange_universities_filter_url + $.param({region:region,country:country,semester:semester}));
+      filter_exchange_modules: async function (uni) {
+        let res = await fetch('https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/exchangemods?' + $.param({uni:uni}));
         let theJson = await res.json();
-        this.exchange_uni_student_count = theJson;
-
-
-        var universities = [];
-        for(var k in theJson[0]['data']) universities.push(k);
-        this.university_data = universities;
-        this.universities_list = universities;
-
-        let res2 = await fetch('https://bt3103-synchronus.firebaseio.com/Exchange/University.json');
-        let theJson2 = await res2.json();
-        // console.log(theJson2);
-        for(var k in theJson2){
-          console.log(theJson2[k]['Name']);
-          console.log(this.defaults.university);
-          if (theJson2[k]['Name'] == this.defaults.university){
-            this.university_region = theJson2[k]['Region'];
-            this.university_country = theJson2[k]['Country'];
-          }
-        }
-
-
-
+        this.exchange_modules = theJson;
       },
       title: function(route) {
         return this.route_titles[route]
       },
-      navigate_exchange: function(region){
-        this.defaults.region = region;
-        this.filter_exchange_universities(region, this.default_country[region], this.defaults.semester);
-        this.$router.push('/exchange_universities')
-      },
       fillData() {
-        // this.university_data = ['School 1','School 2'];
-        // this.students_course_data = [1,2];
-        // this.students_others_data = [4,5];
-        this.filter_exchange_modules('All continents', 'All countries', 'AY14/15 to AY 18/19');
+        this.filter_exchange_modules(this.chosen_university);
       }
     }
   };

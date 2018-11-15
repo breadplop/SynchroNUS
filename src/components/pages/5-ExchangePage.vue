@@ -9,14 +9,13 @@
             <v-overflow-btn
               :items="universities_list"
               label="Choose partner university"
-              target="#dropdown-example"
-              @change="filter_exchange_universities(defaults.region, default_country[defaults.region], defaults.semester)"
+              v-model="defaults.university"
               solo
             ></v-overflow-btn>
           </v-flex>
 
           <v-flex xs12 sm2>
-            <v-btn color="info" v-on:click="filter_exchange_universities(defaults.region)">Go!</v-btn>
+            <v-btn color="info" v-on:click="navigate_exchange_modules(defaults.university)">Go!</v-btn>
           </v-flex>
         </v-layout>
 
@@ -33,7 +32,6 @@
                 :src="card.src"
                 height="150px"
                 v-on:click="navigate_exchange(card.title)"
-                :chosen_region="card.title"
               >
                 <v-container
                   fill-height
@@ -51,7 +49,7 @@
             </v-card>
           </v-flex>
         </v-layout>
-        <geo-chart :data="[['United States', 26], ['Canada',10], ['Nigeria',2], ['Indonesia',5], ['China', 12], ['Thailand',5], ['Turkey',3], ['Australia',13], ['Russia',3], ['Germany', 8], ['Sweden',10], ['Brazil', 22]]"></geo-chart>
+        <geo-chart :data="[['United States', 7], ['Korea',1],['Taiwan',1], ['Singapore',1], ['China', 2], ['Japan',1], ['Switzerland',1],['Hong Kong',1], ['Sweden',1], ['United Kingdom',2], ['Germany', 1], ['Denmark',1]]"></geo-chart>
 
 
       </v-container>
@@ -76,11 +74,16 @@
     },
     data() {
       return {
-        universities_list: ['Royal Institute of Technology (KTH)', 'Technical University of Munich', 'Peking University'],
+        universities_list: ['Columbia University', 'ETH Zurich', 'King\'s College London',
+          'Nanyang Technology University', 'National Taiwan University', 'New York University',
+          'Peking University','Pennsylvania State University','Purdue University', 'Seoul University',
+          'Technical University of Munich','The University of Hong Kong','Tokyo University','Tsing Hua University',
+          'University of California, Berkeley','University of California, Los Angeles','University of Copenhagen',
+          'University of Edinburgh','University of Lund','Yale University'],
         exchange_uni_student_count: {},
         exchange_universities_filter_url:"https://j4e862m1ei.execute-api.us-west-2.amazonaws.com/default/Synchronus_exchange_universities?",
         default_country: {'All continents':'All countries', 'Africa': 'All countries in Africa', 'Asia': 'All countries in Asia', 'Australia (Oceania)': 'All countries in Australia (Oceania)', 'Europe':'All countries in Europe', 'North America': 'All countries in North America', 'South America': 'All countries in South America' },
-        defaults:{'display': 'My course','university':'KTH', 'module_type':'My core modules', 'region':'All continents', 'country':'All countries', 'semester': 'AY14/15 to AY18/19'},
+        defaults:{'display': 'My course','university':null, 'module_type':'My core modules', 'region':'All continents', 'country':'All countries', 'semester': 'AY14/15 to AY18/19'},
         cards: [
           { title: 'All continents', src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg', flex: 6},
           { title: 'Africa', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3 },
@@ -95,26 +98,22 @@
     },
     computed: {
       currentRoute () {
-        // We will see what `params` is shortly
         return this.$route.path
       },
     },
     mounted () {
     },
     methods:{
-      filter_exchange_universities: async function (region, country, semester) {
-        let res = await fetch(this.exchange_universities_filter_url + $.param({region:region,country:country,semester:semester}));
-        let theJson = await res.json();
-        this.exchange_uni_student_count = theJson
-      },
       title: function(route) {
         return this.route_titles[route]
       },
       navigate_exchange: function(region){
-        this.defaults.region = region;
-        this.filter_exchange_universities(region, this.default_country[region], this.defaults.semester);
         router.push({path:'/exchange-universities', name:'Exchange Universities', params:{ chosen_region: region }});
         console.log(region);
+      },
+      navigate_exchange_modules: function(university){
+        router.push({path:'/exchange-modules', name:'Exchange Modules', params:{ chosen_university: university }});
+        console.log(university);
       },
     }
   };
