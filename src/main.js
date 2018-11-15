@@ -53,9 +53,11 @@ Vue.use(Vuetify, {
 
 import VueChartkick from 'vue-chartkick'
 import Highcharts from 'highcharts'
+import VueResource from 'vue-resource';
 
 Vue.use(VueChartkick, {adapter: Highcharts})
 Vue.use(router)
+Vue.use(VueResource)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

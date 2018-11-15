@@ -2,12 +2,56 @@
 <v-app light>
 <v-content>
     <v-container>
-        <filters></filters>
+        <!-- <filters></filters> -->
+                <br>
+        <p>Please use all filters </p>
+        <v-layout row wrap mb-5>
+
+          <v-flex xs12 sm5>
+                
+            <v-overflow-btn
+              label="Choose Class"
+              :items="Object.keys(class_filter)"
+              target="#dropdown-example"
+              @change="fetchUrl(filtered)"
+              v-model="filtered.class_filter"
+              solo
+            ></v-overflow-btn>
+            <v-overflow-btn
+              :items="faculty_filter"
+              label="Choose Faculty"
+              target="#dropdown-example"
+              @change="fetchUrl(filtered)"
+              v-model="filtered.faculty_filter"
+              solo
+            ></v-overflow-btn>
+            </v-flex>
+            <v-flex xs12 sm5>
+                <v-overflow-btn
+                :items="cap_filter"
+                label="CAP between.."
+                target="#dropdown-example"
+                @change="fetchUrl(filtered)"
+                v-model="filtered.cap_filter"
+                solo
+                ></v-overflow-btn>
+
+                <v-switch
+                    :key="similarStudentsFlag"
+                    :label="'Students Similar to Me: ' + similarStudentsFlag"
+                    v-model='similarStudentsFlag'
+                ></v-switch>
+            </v-flex>
+            <p style='color:red'>{{loading}}</p>
+            <div class='tooltip' style='color:red'>{{error}}
+            <span class='tooltiptext'>Please remember to use all filters!</span>
+        </div>
+        </v-layout>
     </v-container>
     <v-container id='1' grid-list-xl>
 <!--first row-->        
         <!--Breakdown of Job Search Channel by Industry and Occupation -->
-        <v-header><h2>Breakdown of Job Search Channel by Industry and Occupation</h2></v-header>
+        <h2>Breakdown of Job Search Channel by Industry and Occupation</h2>
         <br>
         <v-layout row wrap>
             <v-flex xs15 sm6>
@@ -32,7 +76,7 @@
         <br>
 <!--second row-->        
         <!--Amount of Time in Job Search before landing an offer -->
-        <v-header><h2>Amount of Time in Job Search before landing an offer</h2></v-header>
+        <h2>Amount of Time in Job Search before landing an offer</h2>
         <v-layout>
             <v-flex xs15 sm12>
                 <h3>Amount of time to get a job offer</h3>
@@ -73,6 +117,20 @@
     
         data () {
         return {
+            error: '',
+            loading: '',
+            filtered: {class_filter: 'Choose Class of 20XX', faculty_filter: 'Pick Faculty', cap_filter: 'Pick Cap'},
+            class_filter: {
+                    '2012' : '2012',
+                    '2013' : '2013',
+                    '2014' : '2014',
+                    '2015' : '2015',
+                    '2016' :  '2016',
+                    '2017' : '2017'
+                },
+            faculty_filter: ['All', 'SOC', 'FASS', 'SDE', 'BIZ', 'Science'],
+            cap_filter: ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5'],
+            similarStudentsFlag: false,
             datacollection: null,
             industry_jobchannels: [{name: "NUSTalentConnect", data: [["Tech",32],["Finance",46],["Real Estate",28],["Healthcare",21]]},
                     {name: "Social Media Network", data: [["Tech",25],["Finance",41],["Healthcare",21],["Real Estate",17]]},
@@ -92,25 +150,71 @@
         this.fillData()
         },
         methods: {
-        fillData () {
-            this.datacollection = {
-            labels: [this.getRandomInt(), this.getRandomInt()],
-            datasets: [
-                {
-                label: 'Data One',
-                backgroundColor: 'green',
-                data: [this.getRandomInt(), this.getRandomInt()]
-                }, {
-                label: 'Data One',
-                backgroundColor: '#f87979',
-                data: [this.getRandomInt(), this.getRandomInt()]
-                }, 
-            ]
-            }
-        },
-        getRandomInt () {
-            return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-        }
+            fillData () {
+                this.datacollection = {
+                labels: [this.getRandomInt(), this.getRandomInt()],
+                datasets: [
+                    {
+                    label: 'Data One',
+                    backgroundColor: 'green',
+                    data: [this.getRandomInt(), this.getRandomInt()]
+                    }, {
+                    label: 'Data One',
+                    backgroundColor: '#f87979',
+                    data: [this.getRandomInt(), this.getRandomInt()]
+                    }, 
+                ]
+                }
+            },
+            getRandomInt () {
+                return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+            },
+            fetchUrl: async function(filter_params) {
+                try {
+                    
+                    // probably need to adjust the cap list and faculty list
+                    this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+                    console.log(filter_params)
+                    let class_param = this.$data.class_filter[filter_params.class_filter]
+                    let cap_param = filter_params.class_filter
+                    let faculty_param = filter_params.faculty_filter
+                    let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/ges?'
+                    let urlToFetch = url + $.param({cap:cap_param, faculty: faculty_param, class: class_param}) 
+                    
+                    //chart1
+                    let chart_name1 = 'count_job_title_ck' //TODO
+                    let res = await fetch(urlToFetch + $.param({chart:chart_name1}));
+                    let theJson = await res.json()
+                    this.data.count_job_title_ck.data = theJson
+    
+                    //chart2
+                    let chart_name2 = 'count_job_title_ck'
+                    let res2 = await fetch(urlToFetch + $.param({chart:chart_name2}));
+                    let theJson2 = await res2.json()
+                    this.data.count_job_title_ck.data = theJson2
+    
+                    this.loading = 'Still aggregating. We are almost done, please bear with us!'  
+    
+                    //chart3
+                    let chart_name3 = 'count_job_title_ck'
+                    let res3 = await fetch(urlToFetch + $.param({chart:chart_name4}));
+                    let theJson3 = await res3.json()
+                    this.data.relevance_industry_ck.data = theJson3
+    
+                    //chart4
+                    let chart_name4 = 'count_job_title_ck'
+                    let res4 = await fetch(urlToFetch + $.param({chart:chart_name4}));
+                    let theJson4 = await res4.json()
+                    this.data.relevance_job_title_ck.data = theJson4
+                    
+                    this.loading = 'Results are now fully loaded!'
+                
+                } catch (error) {
+                    this.loading = ''
+                    this.error = 'ERROR.'
+                    
+                }}
+                
         }
     }
 </script>
