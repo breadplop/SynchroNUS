@@ -40,7 +40,7 @@
             ></v-overflow-btn>
           </v-flex>
         </v-layout>
-        <p>Number of students who went on exchange to <b>{{default_country[defaults.region]}}</b> in <b>{{defaults.ay}}</b></p>
+        <p>Number of students who went on exchange to <b>{{default_country[defaults.region]}}</b> in <b>{{defaults.ay}} {{defaults.sem}}</b></p>
         <v-card class="pa-3" v-if="Object.keys(exchange_uni_student_count[0]['data']).length != 0">
           <bar-chart :data='exchange_uni_student_count' :stacked="true"></bar-chart>
         </v-card>
