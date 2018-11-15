@@ -272,45 +272,45 @@
                 this.data.count_industry_ck.data = theJson2
                 console.log(theJson2)
     
-                // //chart3
-                // let chart_name3 = 'relevance_industry'
-                // let res3 = await fetch(urlToFetch + $.param({chart:chart_name4}));
-                // let theJson3 = await res3.json()
-                // this.data.relevance_industry_ck.data = theJson3
+                //chart3
+                let chart_name3 = 'relevance_industry'
+                let res3 = await fetch(urlToFetch + $.param({chart:chart_name4}));
+                let theJson3 = await res3.json()
+                this.data.relevance_industry_ck.data = theJson3
     
-                // //chart4
-                // let chart_name4 = 'relevance_job_title'
-                // let res4 = await fetch(urlToFetch + $.param({chart:chart_name4}));
-                // let theJson4 = await res4.json()
-                // this.data.relevance_job_title_ck.data = theJson4
+                //chart4
+                let chart_name4 = 'relevance_job_title'
+                let res4 = await fetch(urlToFetch + $.param({chart:chart_name4}));
+                let theJson4 = await res4.json()
+                this.data.relevance_job_title_ck.data = theJson4
                 
-                // this.loading = 'Still aggregating. We are almost done, please bear with us!'  
+                this.loading = 'Still aggregating. We are almost done, please bear with us!'  
     
-                // //chart5
-                // let chart_name5 = 'income_cap'
-                // let res5 = await fetch(urlToFetch + $.param({chart:chart_name5}));
-                // let theJson5 = await res5.json()
-                // this.data.cap_vs_income.data = theJson5
+                //chart5
+                let chart_name5 = 'income_cap'
+                let res5 = await fetch(urlToFetch + $.param({chart:chart_name5}));
+                let theJson5 = await res5.json()
+                this.data.cap_vs_income.data = theJson5
     
-                // //chart6
-                // let chart_name6 = 'preparedness_industry'
-                // let res6 = await fetch(urlToFetch + $.param({chart:chart_name6}));
-                // let theJson6 = await res6.json()
-                // this.data.preparedness_industry_ck.data = theJson6
+                //chart6
+                let chart_name6 = 'preparedness_industry'
+                let res6 = await fetch(urlToFetch + $.param({chart:chart_name6}));
+                let theJson6 = await res6.json()
+                this.data.preparedness_industry_ck.data = theJson6
                 
-                // this.loading = 'Final 2 charts!'
+                this.loading = 'Final 2 charts!'
     
-                // //chart7
-                // let chart_name7 = 'preparedness_job_title'
-                // let res7 = await fetch(urlToFetch + $.param({chart:chart_name7}));
-                // let theJson7 = await res7.json()
-                // this.data.preparedness_job_title_ck.data = theJson7
+                //chart7
+                let chart_name7 = 'preparedness_job_title'
+                let res7 = await fetch(urlToFetch + $.param({chart:chart_name7}));
+                let theJson7 = await res7.json()
+                this.data.preparedness_job_title_ck.data = theJson7
     
-                // //chart8
-                // let chart_name8 = 'income_by_job_title'
-                // let res8 = await fetch(urlToFetch + $.param({chart:chart_name8}));
-                // let theJson8 = await res8.json()
-                // this.data.income_by_job_title_ck.data = theJson8
+                //chart8
+                let chart_name8 = 'income_by_job_title'
+                let res8 = await fetch(urlToFetch + $.param({chart:chart_name8}));
+                let theJson8 = await res8.json()
+                this.data.income_by_job_title_ck.data = theJson8
     
     
                 
