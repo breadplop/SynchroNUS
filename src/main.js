@@ -24,6 +24,7 @@ import {
   VCard,
   VImg,
   VDivider,
+  VAlert,
   transitions
 } from 'vuetify'
 import '../node_modules/vuetify/src/stylus/app.styl'
@@ -45,6 +46,7 @@ Vue.use(Vuetify, {
     VCard,
     VImg,
     VDivider,
+    VAlert,
     transitions
   }
 })
