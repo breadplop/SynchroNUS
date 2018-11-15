@@ -237,31 +237,37 @@
       },
     
       fetchUrl: async function(filter_params) {
-        this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
-        console.log(filter_params)
-        let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
-        console.log('sem_pram=' + sem_param)
-        let cap_param = filter_params.semesters_filter
-        let faculty_param = filter_params.faculty_filter
-        let module_param = filter_params.module_filter
-        this.module = module_param
-        let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/teaching?' //term=1710&'
-        let urlToFetch = url + $.param({module:module_param, term:sem_param}) 
-        console.log(urlToFetch + '&question=t1')
-        let res = await fetch(urlToFetch + '&question=t1');
-        let theJson = await res.json()
-        this.data.t1_data_ck.data = theJson
-        // this.info.falseFlag = theJson
-        this.loading = 'Still aggregating. We are almost done, please bear with us!'  
-        let res2 = await fetch(urlToFetch + '&question=t2');
-        let res3 = await fetch(urlToFetch + '&question=t3');
-        let theJson2 = await res2.json()
-        let theJson3 = await res3.json()
-        this.data.t2_data_ck.data = theJson2
-        this.data.t3_data_ck.data = theJson3
-        console.log(theJson)
-        this.loading = 'Results are now fully loaded!'
-        console.log('results is now fully loaded')
+          try {
+              this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+              console.log(filter_params)
+              let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
+              console.log('sem_pram=' + sem_param)
+              let cap_param = filter_params.semesters_filter
+              let faculty_param = filter_params.faculty_filter
+              let module_param = filter_params.module_filter
+              this.module = module_param
+              let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/teaching?' //term=1710&'
+              let urlToFetch = url + $.param({module:module_param, term:sem_param}) 
+              console.log(urlToFetch + '&question=t1')
+              let res = await fetch(urlToFetch + '&question=t1');
+              let theJson = await res.json()
+              this.data.t1_data_ck.data = theJson
+              // this.info.falseFlag = theJson
+              this.loading = 'Still aggregating. We are almost done, please bear with us!'  
+              let res2 = await fetch(urlToFetch + '&question=t2');
+              let res3 = await fetch(urlToFetch + '&question=t3');
+              let theJson2 = await res2.json()
+              let theJson3 = await res3.json()
+              this.data.t2_data_ck.data = theJson2
+              this.data.t3_data_ck.data = theJson3
+              console.log(theJson)
+              this.loading = 'Results are now fully loaded!'
+              console.log('results is now fully loaded')
+              
+          } catch (error) {
+              this.loading = ''
+              this.error = 'ERROR.' 
+          }
       }
     }
   }

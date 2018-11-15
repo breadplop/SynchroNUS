@@ -5,6 +5,7 @@
         <!-- <filters></filters> -->
                 <br>
         <p>Please use all filters </p>
+        
         <v-layout row wrap mb-5>
 
           <v-flex xs12 sm5>
@@ -13,7 +14,7 @@
               label="Choose Class"
               :items="Object.keys(class_filter)"
               target="#dropdown-example"
-              @change="fetchUrl(filtered)"
+              
               v-model="filtered.class_filter"
               solo
             ></v-overflow-btn>
@@ -21,7 +22,7 @@
               :items="faculty_filter"
               label="Choose Faculty"
               target="#dropdown-example"
-              @change="fetchUrl(filtered)"
+              
               v-model="filtered.faculty_filter"
               solo
             ></v-overflow-btn>
@@ -31,7 +32,7 @@
                 :items="cap_filter"
                 label="CAP between.."
                 target="#dropdown-example"
-                @change="fetchUrl(filtered)"
+                
                 v-model="filtered.cap_filter"
                 solo
                 ></v-overflow-btn>
@@ -42,13 +43,31 @@
                     v-model='similarStudentsFlag'
                 ></v-switch>
             </v-flex>
+                <v-btn @click="fetchUrl(filtered)">Go</v-btn>
+        </v-layout>
             <p style='color:red'>{{loading}}</p>
             <div class='tooltip' style='color:red'>{{error}}
-            <span class='tooltiptext'>Please remember to use all filters!</span>
-        </div>
-        </v-layout>
+            <span class='tooltiptext'>No results available for filters specified.</span>
+            </div>
     </v-container>
     <v-container id='1' grid-list-xl>
+
+<!--zero row-->
+
+    <v-layout v-if='similarStudentsFlag== true'>
+        <v-flex xs12 sm12>
+            <h2> Summary</h2>
+            <p>
+                Characteristics of students similar to you (according to cap, course and specialization (if any)):
+                <ul>
+                    <li>Most popular job searching months: November, February</li>
+                    <li>Most popular job search platforms: Online sourcing</li>
+                </ul>
+            </p>        
+                    
+        </v-flex>
+    </v-layout>
+
 <!--first row-->        
         <!--Breakdown of Job Search Channel by Industry and Occupation -->
         <h2>Breakdown of Job Search Channel by Industry and Occupation</h2>
@@ -80,7 +99,7 @@
         <v-layout>
             <v-flex xs15 sm12>
                 <h3>Amount of time to get a job offer</h3>
-                <v-subheader>What is the average time to get a job offer by job search channel?</v-subheader>
+                What is the average time to get a job offer by job search channel?
                 <line-chart 
                     title="Amount of time to get job offer" 
                     xtitle="No. of Weeks" 
@@ -92,7 +111,7 @@
         <v-layout>
             <v-flex xs15 sm12>
                 <h3>Month of start of job search</h3>
-                <v-subheader>When is the best time to start looking for jobs?</v-subheader>
+                When is the best time to start looking for jobs?
                 <line-chart 
                     title="Month of start of job search" 
                     xtitle="Month" 
@@ -121,15 +140,13 @@
             loading: '',
             filtered: {class_filter: 'Choose Class of 20XX', faculty_filter: 'Pick Faculty', cap_filter: 'Pick Cap'},
             class_filter: {
-                    '2012' : '2012',
-                    '2013' : '2013',
                     '2014' : '2014',
                     '2015' : '2015',
                     '2016' :  '2016',
                     '2017' : '2017'
                 },
-            faculty_filter: ['All', 'SOC', 'FASS', 'SDE', 'BIZ', 'Science'],
-            cap_filter: ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5'],
+            faculty_filter: ['BIZ', 'FASS', 'FoE', 'FoS', 'SDE', 'SCALE', 'NUS', 'MDP', 'NUSMed', 'ISS', 'SoC', 'RMI', 'FoL', 'SPP', 'NGS', 'YNC', 'FoD', 'DUKE MS', 'MUS', 'SMA', 'SPH', 'TDSI', 'TLIAP'],
+            cap_filter: [3,4,5], // ['All', '<3.0', '3.0-3.5', '3.5-4.0', '4.0-4.5', '>4.5'],
             similarStudentsFlag: false,
             datacollection: null,
             industry_jobchannels: [{name: "NUSTalentConnect", data: [["Tech",32],["Finance",46],["Real Estate",28],["Healthcare",21]]},
@@ -174,38 +191,41 @@
                     
                     // probably need to adjust the cap list and faculty list
                     this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+                    console.log('filterparams is: ') 
                     console.log(filter_params)
                     let class_param = this.$data.class_filter[filter_params.class_filter]
-                    let cap_param = filter_params.class_filter
+                    let cap_param = filter_params.cap_filter
                     let faculty_param = filter_params.faculty_filter
                     let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/ges?'
-                    let urlToFetch = url + $.param({cap:cap_param, faculty: faculty_param, class: class_param}) 
-                    
+                    let urlToFetch = url + $.param({cap:cap_param, faculty: faculty_param, class: class_param}) + '&'
+                    console.log('urltofetch=' + urlToFetch)
                     //chart1
-                    let chart_name1 = 'count_job_title_ck' //TODO
+                    let chart_name1 = 'industry_jobchannels' //TODO
                     let res = await fetch(urlToFetch + $.param({chart:chart_name1}));
+                    console.log('res=' + res)
                     let theJson = await res.json()
-                    this.data.count_job_title_ck.data = theJson
+                    console.log('thejson' + theJson)
+                    this.industry_jobchannels = theJson
     
                     //chart2
-                    let chart_name2 = 'count_job_title_ck'
+                    let chart_name2 = 'occupation_jobchannels'
                     let res2 = await fetch(urlToFetch + $.param({chart:chart_name2}));
                     let theJson2 = await res2.json()
-                    this.data.count_job_title_ck.data = theJson2
+                    this.occupation_jobchannels = theJson2
     
                     this.loading = 'Still aggregating. We are almost done, please bear with us!'  
     
                     //chart3
-                    let chart_name3 = 'count_job_title_ck'
+                    let chart_name3 = 'time_jobchannels'
                     let res3 = await fetch(urlToFetch + $.param({chart:chart_name4}));
                     let theJson3 = await res3.json()
-                    this.data.relevance_industry_ck.data = theJson3
+                    this.time_jobchannels = theJson3
     
                     //chart4
-                    let chart_name4 = 'count_job_title_ck'
+                    let chart_name4 = 'month_jobchannels'
                     let res4 = await fetch(urlToFetch + $.param({chart:chart_name4}));
                     let theJson4 = await res4.json()
-                    this.data.relevance_job_title_ck.data = theJson4
+                    this.month_jobchannels = theJson4
                     
                     this.loading = 'Results are now fully loaded!'
                 
@@ -214,7 +234,7 @@
                     this.error = 'ERROR.'
                     
                 }}
-                
+
         }
     }
 </script>
