@@ -182,30 +182,30 @@
                     let urlToFetch = url + $.param({cap:cap_param, faculty: faculty_param, class: class_param}) 
                     
                     //chart1
-                    let chart_name1 = 'count_job_title_ck' //TODO
+                    let chart_name1 = 'industry_jobchannels' //TODO
                     let res = await fetch(urlToFetch + $.param({chart:chart_name1}));
                     let theJson = await res.json()
-                    this.data.count_job_title_ck.data = theJson
+                    this.industry_jobchannels = theJson
     
                     //chart2
-                    let chart_name2 = 'count_job_title_ck'
+                    let chart_name2 = 'occupation_jobchannels'
                     let res2 = await fetch(urlToFetch + $.param({chart:chart_name2}));
                     let theJson2 = await res2.json()
-                    this.data.count_job_title_ck.data = theJson2
+                    this.occupation_jobchannels = theJson2
     
                     this.loading = 'Still aggregating. We are almost done, please bear with us!'  
     
                     //chart3
-                    let chart_name3 = 'count_job_title_ck'
+                    let chart_name3 = 'time_jobchannels'
                     let res3 = await fetch(urlToFetch + $.param({chart:chart_name4}));
                     let theJson3 = await res3.json()
-                    this.data.relevance_industry_ck.data = theJson3
+                    this.time_jobchannels = theJson3
     
                     //chart4
-                    let chart_name4 = 'count_job_title_ck'
+                    let chart_name4 = 'month_jobchannels'
                     let res4 = await fetch(urlToFetch + $.param({chart:chart_name4}));
                     let theJson4 = await res4.json()
-                    this.data.relevance_job_title_ck.data = theJson4
+                    this.month_jobchannels = theJson4
                     
                     this.loading = 'Results are now fully loaded!'
                 
@@ -214,7 +214,7 @@
                     this.error = 'ERROR.'
                     
                 }}
-                
+
         }
     }
 </script>

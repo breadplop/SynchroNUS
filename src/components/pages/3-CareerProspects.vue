@@ -172,44 +172,44 @@
         data: {
             cap_vs_income: {
                 name: 'Cap vs Income',
-                data: [[4.13, 5000],[4.5, 4200],[4.5, 4200],[4.0, 4200],[4.65, 5200],[3.8, 4000],[3.65, 3800],[3.3, 3500],[4.24, 5100]]
+                data: [['4.13', '5000'], ['4.5', '4200'], ['4.5', '4200'], ['4.0', '4200'], ['4.65', '5200'], ['3.8', '4000'], ['3.65', '3800'], ['3.3', '3500'], ['4.24', '5100']]
             },
             count_job_title_ck: {
                 name: 'Count Job Title',
-                data: [['Consultant', 50], ['Financial Analyst', 48], ['Risk Analyst', 40], ['Data Analyst', 60], ['Data Scientist', 42]]
+                data: [['Consultant', "50"], ['Financial Analyst', "48"], ['Risk Analyst', "40"], ['Data Analyst', "60"], ['Data Scientist', "42"]]
             },
             count_industry_ck: {
                 name: 'Count Industry',
-                data: [['Finance', 66], ['Real Estate', 34], ['Healthcare', 30], ['Manufacturing', 25], ['Telecommunications', 28], ['F&B', 23]]
+                data: [['Finance', "66"], ['Real Estate', "34"], ['Healthcare', "30"], ['Manufacturing', "25"], ['Telecommunications', "28"], ['F&B', "23"]]
             },
             relevance_industry_ck: {
                 name: 'Relevance of Industry',
-                data: [['Finance', 4.4], ['Real Estate', 3.6], ['Healthcare', 3.6], ['Manufacturing', 3.3], ['Telecommunications', 3.3], ['F&B', 3.1]]
+                data: [['Finance', '4.4'], ['Real Estate', '3.6'], ['Healthcare', '3.6'], ['Manufacturing', '3.3'], ['Telecommunications', '3.3'], ['F&B', '3.1']]
             },
             relevance_job_title_ck: {
                 name: 'Relevance of Job Title',
-                data: [['Consultant', 4.2],['Data Analyst', 4.6], ['Data Scientist', 3.1], ['Risk Analyst', 4.1], ['Financial Analyst', 4.1]]
+                data: [['Consultant', '4.2'],['Data Analyst', '4.6'], ['Data Scientist', '3.1'], ['Risk Analyst', '4.1'], ['Financial Analyst', 4.1]]
             },
             preparedness_industry_ck: {
                 name: 'Preparedness Score by Industry',
-                data: [['Finance', 4.0], ['Real Estate', 3.3], ['Healthcare', 3.6], ['Manufacturing', 3.5], ['Telecommunications', 3.3], ['F&B', 3.1]]
+                data: [['Finance', '4.0'], ['Real Estate', '3.3'], ['Healthcare', '3.6'], ['Manufacturing', '3.5'], ['Telecommunications', '3.3'], ['F&B', 3.1]]
             },
             preparedness_job_title_ck: {
                 name: 'Preparedness Scoress by Job Title ',
-                data: [['Consultant', 3.4],['Data Analyst', 4.6], ['Data Scientist', 3.1], ['Risk Analyst', 4.1], ['Financial Analyst', 4.0]]
+                data: [['Consultant', '3.4'],['Data Analyst', '4.6'], ['Data Scientist', '3.1'], ['Risk Analyst', '4.1'], ['Financial Analyst', 4.0]]
             },
             income_by_job_title_ck: {
                 name: '',
                 data: [
                     {
                         name: "Data Analyst", 
-                        data: [["<3K",32],["3.5K to 4K",46],["4K to 4.5K",28],["4.5K to 5K",21]]},
+                        data: [["<3K","32"],["3.5K to 4K","46"],["4K to 4.5K","28"],["4.5K to 5K","21"]]},
                     {
                         name: "Data Scientist", 
-                        data: [["<3K",25],["4K to 4.5K",41],["4.5K to 5K",21],["5K to 5.5K",17]]},
+                        data: [["<3K","25"],["4K to 4.5K","41"],["4.5K to 5K","21"],["5K to 5.5K","17"]]},
                     {
                         name: "Data Engineer", 
-                        data: [["<3K",4],["3.5K to 4K",6],["4K to 4.5K",8],["4.5K to 5K",4]]
+                        data: [["<3K","4"],["3.5K to 4K","6"],["4K to 4.5K","8"],["4.5K to 5K","4"]]
                     }],
             }
         }
