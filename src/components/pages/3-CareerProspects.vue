@@ -4,7 +4,7 @@
     <v-container id='3' grid-list-xl>
         <br>
         <p>Please use all filters </p>
-        <v-btn @click="fetchUrl(filtered)">Go</v-btn>
+        
         <v-layout row wrap mb-5>
 
           <v-flex xs12 sm5>
@@ -42,15 +42,32 @@
                     v-model='similarStudentsFlag'
                 ></v-switch>
             </v-flex>
-
+            <v-btn @click="fetchUrl(filtered)">Go</v-btn>
         </v-layout>
-        <p style='color:red'>{{loading}}</p>
-        <div class='tooltip' style='color:red'>{{error}}
-            <span class='tooltiptext'>Please remember to use all filters!</span>
-        </div>
+        <v-layout v-if='loading!=""'>
+            <p style='color:red'>{{loading}}</p>
+        </v-layout>
+            <div v-if='error!=""' class='tooltip' style='color:red'>{{error}}
+                <span class='tooltiptext'>No results available for filters specified.</span>
+            </div>
     </v-container>
     <v-container id='1' grid-list-xl>
 <!--zero row -->
+        <v-layout v-if='similarStudentsFlag== true'>
+            <v-flex xs12 sm12>
+                <h2> Summary</h2>
+                <p>
+                    Characteristics of students similar to you (according to cap, course and specialization (if any)):
+                    <ul>
+                        <li>Most popular jobs: data analyst, software engineer, data scientist.</li>
+                        <li>Average salary: $4000</li>
+                        <li>Favorite industries: healthcare, Finance</li>
+                    </ul>
+                </p>        
+                        
+            </v-flex>
+        </v-layout>
+
         <h2>How does CAP affect Income</h2>
         <v-layout row wrap>
             <v-flex xs12 sm12>
@@ -229,23 +246,31 @@
                 let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/ges?'
                 let urlToFetch = url + $.param({cap:cap_param, faculty: faculty_param, class: class_param} ) + "&" 
                 console.log('testing' + cap_param + class_param + faculty_param)
+                
+                //test first chart test random chart to delete
+                // let restest = await fetch('https://3gx0b3iqpg.execute-api.us-west-2.amazonaws.com/default/synchronus?grade_chart=3')
+                // console.log(restest)
+                // let thejsontest = await restest.json()
+                // this.data.count_industry_ck.data = thejsontest
+                // comsole.log(thejsontest)
+
                 //chart1
                 let chart_name1 = 'count_job_title' //TODO
                 let res = await fetch(urlToFetch + $.param({chart:chart_name1}));
                 console.log('res')
                 console.log(res)
-                let theJson = await res.body()//res.json()
+                let theJson = await res.json()
                 console.log('body')
                 console.log(theJson)
                 this.data.count_job_title_ck.data = theJson
                 console.log(theJson)
     
-                // //chart2
-                // let chart_name2 = 'count_industry'
-                // let res2 = await fetch(urlToFetch + $.param({chart:chart_name2}));
-                // let theJson2 = await res2.json()
-                // this.data.count_industry_ck.data = theJson2
-                // console.log(theJson2)
+                //chart2
+                let chart_name2 = 'count_industry'
+                let res2 = await fetch(urlToFetch + $.param({chart:chart_name2}));
+                let theJson2 = await res2.json()
+                this.data.count_industry_ck.data = theJson2
+                console.log(theJson2)
     
                 // //chart3
                 // let chart_name3 = 'relevance_industry'
