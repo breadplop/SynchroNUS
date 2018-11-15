@@ -5,6 +5,7 @@
         <!--&lt;!&ndash;<filters></filters>&ndash;&gt;-->
     <!--</v-container>-->
     <v-container id='1' grid-list-xl>
+        
         <h1>{{getModuleName}}</h1>  
         <!-- <v-btn @click='fetchData()'>update module name</v-btn> -->
         <p>Please use all filters </p>
@@ -262,6 +263,7 @@
             try {
                 
                 this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+                this.error=''
                 console.log('filter_params.semesters_filter = ' + filter_params.semesters_filter)
                 console.log('find semesterfilters ' + this.semesters_filter)
                 let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
@@ -269,6 +271,7 @@
                 let cap_param = filter_params.semesters_filter
                 let faculty_param = filter_params.faculty_filter
                 let module_param = filter_params.module_filter
+                this.getModuleName = module_param
                 // let queryParam = '?semester=' + sem_param + '&cap=' + cap_param + '&faculty=' + faculty_param
                 let url = 'https://uw2gpnk5f9.execute-api.ap-southeast-1.amazonaws.com/Prod/test?' //term=1710&'
                 let urlToFetch = url + $.param({module:module_param, term:sem_param}) 

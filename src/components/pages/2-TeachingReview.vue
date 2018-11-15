@@ -239,6 +239,7 @@
       fetchUrl: async function(filter_params) {
           try {
               this.loading = 'Have you used all filters? We are pulling and aggregating the results right now...'  
+              this.error = ''
               console.log(filter_params)
               let sem_param = this.$data.semesters_filter[filter_params.semesters_filter]
               console.log('sem_pram=' + sem_param)
